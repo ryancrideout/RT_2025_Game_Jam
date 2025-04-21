@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8cf1yi5jtr4e"]
+[gd_scene load_steps=12 format=3 uid="uid://c8cf1yi5jtr4e"]
 
 [ext_resource type="Script" uid="uid://dspc8un85qtc6" path="res://grim_reaper/GrimReaper.gd" id="1_1nlnx"]
 [ext_resource type="Texture2D" uid="uid://cdi25ntraolhb" path="res://grim_reaper/assets/Grim_Reaper_Idle.png" id="2_6ixoq"]
+[ext_resource type="Script" uid="uid://r58lhyimo3uu" path="res://grim_reaper/PlayerCamera.gd" id="3_6ixoq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nlnx"]
 radius = 8.0
@@ -69,4 +70,6 @@ shape = SubResource("CapsuleShape2D_1nlnx")
 sprite_frames = SubResource("SpriteFrames_p7w5m")
 animation = &"Idle"
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+script = ExtResource("3_6ixoq")
