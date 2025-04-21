@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk04t8ig150fr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_172a3"]
+bg_color = Color(0.164706, 0.00392157, 0.203922, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 1)
+
+[node name="GrimReaperUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 548.0
+offset_right = 926.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_172a3")

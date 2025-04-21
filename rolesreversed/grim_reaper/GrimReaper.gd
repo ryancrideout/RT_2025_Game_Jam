@@ -1,7 +1,11 @@
 extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var camera = $PlayerCamera
 @export var speed = 625
+
+func _ready() -> void:
+	camera.make_current()
 
 func _process(_delta):
 	sprite_management()
