@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FactionData" load_steps=3 format=3 uid="uid://breoyu6ywtjne"]
+
+[ext_resource type="Script" uid="uid://ykatmwxbi70d" path="res://ai_agent/faction_data.gd" id="1_0rcgo"]
+[ext_resource type="PackedScene" uid="uid://dpinexvnuwfg1" path="res://ai_agent/skeleton.tscn" id="1_w0bgq"]
+
+[resource]
+script = ExtResource("1_0rcgo")
+faction_name = "Undead"
+basic_unit_scene = ExtResource("1_w0bgq")
+basic_unit_name = "Skeleton"
+ranged_unit_name = ""
+special_unit_name = ""

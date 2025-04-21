@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpinexvnuwfg1"]
+[gd_scene load_steps=4 format=3 uid="uid://dpinexvnuwfg1"]
 
 [ext_resource type="Texture2D" uid="uid://b4ua8ul8n5fs8" path="res://ai_agent/skeleton.png" id="1_mmqdv"]
+[ext_resource type="Script" uid="uid://syejdqolgc7c" path="res://ai_agent/skeleton.gd" id="1_uyysq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
 size = Vector2(62, 108)
 
 [node name="Skeleton" type="Node2D"]
+scale = Vector2(1, 0.67197)
+script = ExtResource("1_uyysq")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

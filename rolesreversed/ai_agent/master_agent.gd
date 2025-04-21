@@ -4,12 +4,13 @@ extends Node2D
 var resources = null
 var main_building_scene: PackedScene
 var main_building_position: Vector2
+
 # Reference to buildings node
 var buildings_node = null
+@export var buildings = []
 
 func _ready():
-	pass
-	#call_deferred("_initilize_agent")
+	spawn_unit_timer()
 	
 func _initilize_agent(spawn_position: Vector2,
 					  main_building_scene_path: String,
@@ -58,13 +59,22 @@ func spawn_building(building_scene: PackedScene, building_name, building_positio
 	var building = building_scene.instantiate()
 	building.name = building_name
 	building.position = building_position
+		
 	buildings_node.add_child(building)
+
+	# Set the building's owner to this agent
+	if building.has_method("set_agent_owner"):
+		building.set_agent_owner(self)
+		buildings.append(building)
+		print("Building added to buildings array. Current size: ", buildings.size())
+	else:
+		print("WARNING: Building does not have set_agent_owner method")
 
 	print("Building spawned successfully!")
 	return true
 
 # Function to spawn a new unit if resources allow
-func spawn_unit(unit_type: String = "skeleton") -> bool: #building: Node2D
+func spawn_unit() -> bool: #building: Node2D
 	if not resources:
 		print("ERROR: Resources not available!")
 		return false
@@ -72,12 +82,17 @@ func spawn_unit(unit_type: String = "skeleton") -> bool: #building: Node2D
 	# Check if we have enough resources
 	if resources.try_spawn_unit():
 		# Resource check passed and resources have been deducted
-		print("Spawning unit: ", unit_type)
-		
-		# Here you would instantiate the actual unit
-		# var new_unit = unit_scene.instantiate()
-		# add_child(new_unit)
-		
+
+		if buildings.size() > 0:
+			if buildings[0].has_method("spawn_unit"):
+				buildings[0].spawn_basic_unit()
+			else:
+				print("ERROR: Building does not have request_spawn method")
+				return false
+		else:
+			print("ERROR: No buildings in array")
+			return false
+			
 		return true
 	else:
 		print("Failed to spawn unit: insufficient resources")
@@ -89,3 +104,14 @@ func add_resources(primary_amount: float, secondary_amount: float) -> void:
 		resources.update_primary_resource(primary_amount)
 		resources.update_secondary_resource(secondary_amount)
 		print("Resources updated - PRIMARY: ", resources.PRIMARY_RESOURCE, " SECONDARY: ", resources.SECONDARY_RESOURCE)
+
+func spawn_unit_timer() -> void:
+	var timer = Timer.new()
+	timer.wait_time = 1.0
+	timer.one_shot = false
+	timer.connect("timeout", Callable(self, "_on_spawn_unit_timer_timeout"))
+	add_child(timer)
+	timer.start()
+
+func _on_spawn_unit_timer_timeout() -> void:
+	spawn_unit()

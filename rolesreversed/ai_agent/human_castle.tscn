@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfioo5nwx82pg"]
+
+[ext_resource type="Script" uid="uid://cnlcv2lujg2od" path="res://ai_agent/building_spawner.gd" id="1_cw16t"]
+[ext_resource type="Texture2D" uid="uid://nvetwng2npwa" path="res://ai_agent/human town.png" id="2_cw16t"]
+[ext_resource type="Resource" uid="uid://c6p3jow2vji4g" path="res://ai_agent/factions/humans.tres" id="2_rd8ed"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
+size = Vector2(925, 815)
+
+[node name="HumanCastle" type="Node2D"]
+script = ExtResource("1_cw16t")
+faction_data = ExtResource("2_rd8ed")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 34.5)
+shape = SubResource("RectangleShape2D_oklfc")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(0, 10)
+texture = ExtResource("2_cw16t")
