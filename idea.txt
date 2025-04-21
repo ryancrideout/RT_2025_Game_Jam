@@ -1,0 +1,90 @@
+idea:
+
+eternal skeleton war, undead vs living must exist in balance. you act as the grim reaper trying to keep the battle from ever ending and you have a timer that you want to keep going. if the humans win, you die, if the skeleton wins, you also die.
+
+AI of both sides controlling human spawn and attacking. when humans die the bones are harvested by the skeletons to build more skeletons.
+
+the player acts as the reaper that protects his skeleton army but is mindful that winning too quickly would be the death of the army. humans are the source of the necromantic energy but also bones. if you purge them too far, you lose. if you let them destroy the skeletons completely and win the war, you also lose because they no longer fear you. humans create "infinite" energy but require resources to continue to do so. if they get too weak, they cant sustain themselves (therefore cannot sustain the skeleton army). 
+
+maybe the reaper has an attack that affects both? scythe swing that destroys all.
+
+necromancer can 'spend' bones or energy to influence the battlefield and weaken his own side or weaken the humans. skeletons cannot be destroyed, but only resurrect in the necromantic field (which costs energy).
+
+for the AIs, each side can have a master AI that directs the goal of the collective and tracks global resources.
+
+each 'creep tumour' or human village will spawn a/o direct new entities towards the opposite side. each entity has basic attack AI
+
+reaper is a character controller (wasd movement) and abilities that affect the cursor position.
+reaper abilities:
+
+- scythe swing kills all, long cooldown.
+- spare the dying (keeps humans from dying)
+- bonus revive skeletons (toggleable moving source of revive energy centred on reaper)
+- corpse explosion
+- frighten human villages (prevents upkeep for X time)
+- skeleton stasis (prevents upkeep for X time)
+- promote? make hero unit for either side
+- send to void (remove unit from existence)
+- inspire (similar to promote but speed/stimpack)
+
+2 cameras, global for AI/map and local for reaper (x grid locked around reaper tile).
+
+lower apm gameplay. high impact abilities, less frequent usage.
+large map means you constantly want to be moving so that you can use your cooldowns immediately and move on. large square grid map
+
+### Quick scope‑check (3‑day jam)
+
+| Feature | Keep | Cut / Simplify | Why |
+|---------|------|----------------|-----|
+| **Core loop:** two factions auto‑spawn, you keep the “war timer” in the middle | ✅ |  | One script that increments/decrements a balance bar every N seconds; wins when bar hits an edge. |
+| **Single resource (“Energy”)** that both sides draw from | ✅ | Split resources (bones + energy) | One counter = fewer UI & bookkeeping headaches. |
+| **Spawn points:** 1 graveyard + 1 village per side (total 4) | ✅ | Procedural or many spawners | Keeps pathfinding cheap; easy to tune spawn rates. |
+| **Reaper abilities:** pick **3** (e.g., scythe nuke, revive aura, frighten village) | ✅ | The rest | Three buttons + cooldown icons ≈ 1 evening of work. |
+| **Simple state‑machine AI**: move toward enemy nexus & attack | ✅ | Global “master AI”, hero promotion, upkeep pauses | Basic AStar2D or steering is enough; anything more is overkill. |
+| **One camera** that follows Reaper, with minimap overlay | ✅ | Separate RTS cam | Saves split‑screen logic & UI time. |
+| **Pixel‑art or low‑poly kitbash** | ✅ | Custom skeletal animations | Jam art budget. |
+| **Audio:** one loop + 3 SFX | ✅ | Dynamic soundtrack | Good enough for mood. |
+
+---
+
+#### Biggest risk areas
+
+1. **Pathfinding over “large square grid.”**  
+   Large maps + many units can melt your frame‑time. Keep the arena compact or use straight‑line marching to enemy base (no grid).
+
+2. **Balance logic vs. fun.**  
+   Making “don’t win too fast, don’t lose” *feel* good is tweak‑heavy. Build a debug panel to bump spawn rates & ability cooldowns on the fly.
+
+3. **Ability FX**.  
+   Corpse explosions and global nukes can be VFX rabbit holes. Use shader toy‑style screen shakes & color flashes instead of bespoke particles.
+
+---
+
+#### 72‑hour task sketch (Godot 4)
+
+| Day | Milestone |
+|-----|-----------|
+| **0–4 h** | Git repo, jam scene, placeholder sprites, basic player movement. |
+| **4–16 h** | Implement spawn points, simple unit prefab, collision damage, balance bar UI. |
+| **16–24 h** | Reaper ability system (cooldown tracker, target selection). Start with Scythe Nuke only. |
+| **24–32 h** | Add revive aura + frighten village. Polish feel (screenshake, sfx stubs). |
+| **32–48 h** | Game‑over logic, title + results screen, one music loop, basic menus. |
+| **48–60 h** | Juice pass: flashes, palette swap for day/night cycle, unit death splats. |
+| **60–72 h** | Playtest, tweak numbers, compress assets, itch‑build, trailer GIF. |
+
+---
+
+#### Tiny tweaks that add charm (cost ≈ 1 h each)
+
+- Skeletons re‑assemble with a quick reverse‑explosion animation.
+- Villagers drop a floating “💀” that drifts toward the graveyard (no pathfinding!).
+- Reaper’s scythe draws a circular sweep line using `ImmediateMesh` for instant feedback.
+
+---
+
+### Verdict
+
+The concept is jam‑friendly **if** you boil it down to:  
+“Auto‑battler tug‑of‑war + player with three big cooldowns.”
+
+Everything beyond that—dual resources, hero promotions, global AI governance—can be stretch goals once the timer, spawns, and three abilities are fun. Lock those foundations first, iterate fast, and you’ll finish with something polished in 3 days. Good luck reaping!
