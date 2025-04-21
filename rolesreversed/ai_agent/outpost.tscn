@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwowu8tnourpo"]
+
+[ext_resource type="Texture2D" uid="uid://bdf03wjmpywq8" path="res://ai_agent/bone fort.png" id="1_nnlp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
+size = Vector2(236, 201.5)
+
+[node name="Outpost" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_oklfc")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_nnlp3")
