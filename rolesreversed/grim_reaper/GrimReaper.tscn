@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://c8cf1yi5jtr4e"]
+
+[ext_resource type="Script" uid="uid://dspc8un85qtc6" path="res://grim_reaper/GrimReaper.gd" id="1_1nlnx"]
+[ext_resource type="Texture2D" uid="uid://cdi25ntraolhb" path="res://grim_reaper/assets/Grim_Reaper_Idle.png" id="2_6ixoq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nlnx"]
+radius = 8.0
+height = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_carxk"]
+atlas = ExtResource("2_6ixoq")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g1qx"]
+atlas = ExtResource("2_6ixoq")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cban"]
+atlas = ExtResource("2_6ixoq")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf3od"]
+atlas = ExtResource("2_6ixoq")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayrcd"]
+atlas = ExtResource("2_6ixoq")
+region = Rect2(320, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tefo"]
+atlas = ExtResource("2_6ixoq")
+region = Rect2(400, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p7w5m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_carxk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g1qx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cban")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf3od")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayrcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tefo")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="GrimReaper" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_1nlnx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, -6)
+shape = SubResource("CapsuleShape2D_1nlnx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p7w5m")
+animation = &"Idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
