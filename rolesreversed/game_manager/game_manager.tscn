@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7wq5863evkdy"]
+
+[ext_resource type="Script" uid="uid://denhs1ed5uxx3" path="res://game_manager/game_manager.gd" id="1_2u4md"]
+
+[node name="GameManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_2u4md")
