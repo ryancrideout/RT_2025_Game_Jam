@@ -2,7 +2,7 @@ extends Camera2D
 
 var camera_width
 var camera_height
-var keyboard_step = 10
+var keyboard_step = 25
 @onready var viewport_size = get_viewport().size
 @onready var grim_reaper = $".."
 
@@ -13,7 +13,7 @@ func _ready() -> void:
 	var bottom_limit = 10000
 	set_limits(-10000, -10000, right_limit, bottom_limit)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 
 	if Input.is_action_pressed("ui_right"):
 		if position.x < (limit_right - camera_width / 2.0):

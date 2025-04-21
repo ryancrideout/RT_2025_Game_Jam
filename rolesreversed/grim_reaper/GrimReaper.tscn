@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8cf1yi5jtr4e"]
+[gd_scene load_steps=19 format=3 uid="uid://c8cf1yi5jtr4e"]
 
 [ext_resource type="Script" uid="uid://dspc8un85qtc6" path="res://grim_reaper/GrimReaper.gd" id="1_1nlnx"]
 [ext_resource type="Texture2D" uid="uid://cdi25ntraolhb" path="res://grim_reaper/assets/Grim_Reaper_Idle.png" id="2_6ixoq"]
 [ext_resource type="Script" uid="uid://r58lhyimo3uu" path="res://grim_reaper/PlayerCamera.gd" id="3_6ixoq"]
+[ext_resource type="Texture2D" uid="uid://dkqp5udjk5omp" path="res://grim_reaper/assets/Grim_Reaper_Movement.png" id="3_carxk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nlnx"]
 radius = 8.0
@@ -32,6 +33,30 @@ region = Rect2(320, 0, 80, 80)
 atlas = ExtResource("2_6ixoq")
 region = Rect2(400, 0, 80, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7w5m"]
+atlas = ExtResource("3_carxk")
+region = Rect2(0, 0, 90, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20i64"]
+atlas = ExtResource("3_carxk")
+region = Rect2(90, 0, 90, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bvglw"]
+atlas = ExtResource("3_carxk")
+region = Rect2(180, 0, 90, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmlbe"]
+atlas = ExtResource("3_carxk")
+region = Rect2(270, 0, 90, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk23s"]
+atlas = ExtResource("3_carxk")
+region = Rect2(360, 0, 90, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jmod"]
+atlas = ExtResource("3_carxk")
+region = Rect2(450, 0, 90, 80)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_p7w5m"]
 animations = [{
 "frames": [{
@@ -56,6 +81,29 @@ animations = [{
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7w5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20i64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bvglw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmlbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk23s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jmod")
+}],
+"loop": true,
+"name": &"Movement",
+"speed": 5.0
 }]
 
 [node name="GrimReaper" type="CharacterBody2D"]
@@ -68,8 +116,9 @@ shape = SubResource("CapsuleShape2D_1nlnx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7w5m")
-animation = &"Idle"
+animation = &"Movement"
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 script = ExtResource("3_6ixoq")
