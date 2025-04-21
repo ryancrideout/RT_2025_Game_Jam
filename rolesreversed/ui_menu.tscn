@@ -25,5 +25,6 @@ offset_right = 50.0
 offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
+focus_mode = 0
 text = "Start Game"
 script = ExtResource("1_gww7l")
