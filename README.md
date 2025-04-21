@@ -1,2 +1,49 @@
 # RT_2025_Game_Jam
 Timo and Ryan's 2025 Game Jam. The theme - Roles Reversed
+
+# Notes:
+- **Game Concept**
+  - Creep Style game - nodes or something get placed down (without player influence?) and then it's autonomous to a degree. 
+  - **Mechanics**
+    - Creep Spread / Influence
+    - Maybe this is similar to Pandemic in terms of gameplay?
+      - Maybe this is a more passive game, like cookie clicker, so there will be less player involvement.
+      - Reverse They Are Billions
+    - Will the player place nodes? I think no.
+    - What can the player do?
+      - Purchase upgrades
+      - Research and Development
+      - Set / Prioritize objectives
+    - What objectives do we need?
+      - Magic (to fuel the growth / research?)
+      - Bodies (As a secondary resource)
+      - Arms and Armor (for the warriors to defend the kingdom - This would be upgrades)
+      - Gold (for the score!)
+  - **Gameplay Loop**
+    - A node / something gets placed down, and then it exerts influence, and then the world changes in relation to it.
+    - Victory is when you corrupt X% of the map.
+    - Maybe there is a time limit?
+- **Viable Minimum Product**
+  - ONE tileset map, we can place A NODE, and then it tries to grow and self-replicate, and the world responds to it.
+    - The Node, and all of it's logic:
+      - Logic for how it spreads
+      - Logic for how it corrupts /  
+  - Two objectives - Bodies and Gold
+      - "Stretch Goals" would be more objectives.
+  - One Building Type, and it can be corrupted and uncorrupted
+  - Small agents (Skeletons, Knights?) to traverse the world.
+  - Small UI Bar or something where the player can set priorities.
+  - **Scope and Time Plan**
+    - Need to figure out what the "creep tumor" is, and how it spreads corruption.
+    - Need to figure out what populates the world.
+    - Need to figure out how things get corrupted?
+- **Style / Art Direction**
+  - Demonic influence / Corruption
+  - Necromancy / Necrotic Energy (I'm thinking this one)
+  - Fantasy
+- **Genre**
+  - How it controls / Input Style / Camera Style / etc.
+  - I think we go RTS style... again. HA!
+    - Command structure will be much simpler as we won't be inputting a lot of commands
+- **Code Structure**
+- **Division of Labour**
