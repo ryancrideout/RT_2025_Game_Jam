@@ -8,5 +8,5 @@ script = ExtResource("1_0rcgo")
 faction_name = "Undead"
 basic_unit_scene = ExtResource("1_w0bgq")
 basic_unit_name = "Skeleton"
-ranged_unit_name = null
-special_unit_name = null
+ranged_unit_name = ""
+special_unit_name = ""
