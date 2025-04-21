@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://sotcubg06uv4"]
+[gd_scene load_steps=3 format=3 uid="uid://sotcubg06uv4"]
 
 [ext_resource type="Script" uid="uid://cb33613hn8niu" path="res://ai_agent/master_agent.gd" id="1_ck1kx"]
+[ext_resource type="Script" uid="uid://ct2tsgikcrftg" path="res://ai_agent/resources.gd" id="2_lbhdw"]
 
 [node name="Agent" type="Node2D"]
 script = ExtResource("1_ck1kx")
 
 [node name="Army" type="Node2D" parent="."]
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Resources" type="Node" parent="."]
+script = ExtResource("2_lbhdw")

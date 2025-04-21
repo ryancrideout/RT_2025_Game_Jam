@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpinexvnuwfg1"]
+
+[ext_resource type="Texture2D" uid="uid://b4ua8ul8n5fs8" path="res://ai_agent/skeleton.png" id="1_mmqdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
+size = Vector2(62, 108)
+
+[node name="Skeleton" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_oklfc")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(6, -12)
+texture = ExtResource("1_mmqdv")

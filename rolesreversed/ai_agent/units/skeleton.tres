@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UnitData" load_steps=3 format=3 uid="uid://rqft0vthwlq5"]
+
+[ext_resource type="Script" uid="uid://cvmlp0p1wmfga" path="res://ai_agent/unit_data.gd" id="1_f0j5c"]
+[ext_resource type="PackedScene" uid="uid://dpinexvnuwfg1" path="res://ai_agent/skeleton.tscn" id="2_ypftd"]
+
+[resource]
+script = ExtResource("1_f0j5c")
+display_name = "Skeleton"
+unit_scene = ExtResource("2_ypftd")
+costs = {
+"PRIMARY": 5,
+"SECONDARY": 0
+}
+max_hp = 10
+move_speed = 4.0
+base_damage = 2
+bounty = 3
