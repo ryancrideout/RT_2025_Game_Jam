@@ -7,7 +7,7 @@ func _ready():
     set_process(true)
 
 func _process(delta: float):
-    position.x += speed * delta
+    position.x -= speed * delta
     lifetime -= delta
     if lifetime <= 0:
         queue_free()

@@ -13,7 +13,14 @@ signal spawn_failed(reason)
 var parent_building: Node = null
 var agent_owner: Node = null
 
+@export var faction_data: Resource
+
 func _ready():
+
+    if not faction_data:
+        push_error("Invalid or missing faction data!")
+        return
+        
     # Get reference to the parent building
     parent_building = get_parent()
     
@@ -26,7 +33,9 @@ func set_agent_owner(agent: Node) -> void:
 
 func get_agent_owner() -> Node:
     return agent_owner
-    
+
+
+
 # Main function to spawn a unit
 func spawn_unit(unit_scene: PackedScene) -> Node2D:
     if not unit_scene:
@@ -98,7 +107,16 @@ func is_position_clear(pos: Vector2) -> bool:
             
     return true
 
-# Public method called by signals from the agent AI
-func request_spawn(unit_type: PackedScene) -> bool:
-    var unit = spawn_unit(unit_type)
-    return unit != null
+
+#
+# Public methods called by the agent AI
+#
+
+func spawn_basic_unit():
+    return spawn_unit(faction_data.basic_unit_scene)
+
+func spawn_ranged_unit():
+    return spawn_unit(faction_data.ranged_unit_scene)
+
+func spawn_special_unit():
+    return spawn_unit(faction_data.special_unit_scene)

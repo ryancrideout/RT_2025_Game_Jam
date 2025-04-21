@@ -9,8 +9,6 @@ var main_building_position: Vector2
 var buildings_node = null
 @export var buildings = []
 
-var skeleton_scene: PackedScene = preload("skeleton.tscn")
-
 func _ready():
 	spawn_unit_timer()
 	
@@ -76,8 +74,7 @@ func spawn_building(building_scene: PackedScene, building_name, building_positio
 	return true
 
 # Function to spawn a new unit if resources allow
-func spawn_unit(unit_type: String = "skeleton",
-				unit_scene: PackedScene = skeleton_scene) -> bool: #building: Node2D
+func spawn_unit() -> bool: #building: Node2D
 	if not resources:
 		print("ERROR: Resources not available!")
 		return false
@@ -85,10 +82,10 @@ func spawn_unit(unit_type: String = "skeleton",
 	# Check if we have enough resources
 	if resources.try_spawn_unit():
 		# Resource check passed and resources have been deducted
-		print("Spawning unit: ", unit_type)
+
 		if buildings.size() > 0:
-			if buildings[0].has_method("request_spawn"):
-				buildings[0].request_spawn(unit_scene)
+			if buildings[0].has_method("spawn_unit"):
+				buildings[0].spawn_basic_unit()
 			else:
 				print("ERROR: Building does not have request_spawn method")
 				return false
