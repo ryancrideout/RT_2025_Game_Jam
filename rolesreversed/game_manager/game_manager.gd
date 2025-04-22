@@ -1,6 +1,7 @@
 extends Control
 
 @onready var agent_scene = preload("res://ai_agent/master_agent.tscn")
+@onready var grim_reaper_scene = preload("res://grim_reaper/GrimReaper.tscn")
 
 func _ready():
 	print("Game Manager scene is loaded and ready!")
@@ -11,6 +12,8 @@ func _on_play_button_pressed():
 	spawn_agent(Vector2(6500, 5000), "res://ai_agent/human_castle.tscn", "/root/Game/CanvasLayer/Control/AgentUI/VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer", "HumanAgent")
 	
 	print("Spawned two agents!")
+	
+	spawn_grim_reaper(Vector2(5000, 5000))
 	
 	# Demo: Test resource system after a short delay
 	await get_tree().create_timer(1.0).timeout
@@ -25,6 +28,13 @@ func spawn_agent(spawn_position: Vector2, main_building_scene_path: String, reso
 	agent._initilize_agent(spawn_position, main_building_scene_path, resource_UI_node_path, agent_name)
 	
 	return agent
+	
+# Spawn an agent at the specified position with a given name
+func spawn_grim_reaper(spawn_position: Vector2):
+	var grim_reaper = grim_reaper_scene.instantiate()
+	grim_reaper.position = spawn_position
+	add_child(grim_reaper)
+
 
 # Function to test the resource system
 func test_resource_system(agent):

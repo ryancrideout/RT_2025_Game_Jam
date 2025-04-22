@@ -192,7 +192,7 @@ shape = SubResource("CapsuleShape2D_1nlnx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7w5m")
-animation = &"Idle"
+animation = &"Attacking"
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -202,5 +202,11 @@ script = ExtResource("3_6ixoq")
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="GrimReaperUI" parent="UILayer" instance=ExtResource("5_5g1qx")]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="HitboxShape" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-32, -50, -9, -54, 23, -52, 59, -41, 82, -28, 93, -17, 97, -9, 96, 4, 92, 14, 75, 29, 54, 39, 24, 47, -2, 50, -24, 49, -38, 47, -65, 38, -84, 26, -94, 17, -98, 8, -86, 18, -48, 29, -34, 31, -13, 31, 10, 28, 31, 23, 49, 16, 60, 2, 52, -12, 45, -18, 25, -27, 3, -30, -16, -28, -36, -23, -41, -34, -40, -45)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
