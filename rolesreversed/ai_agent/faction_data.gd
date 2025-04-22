@@ -12,3 +12,5 @@ class_name FactionData
 
 @export var special_unit_scene: PackedScene
 @export var special_unit_name: String
+
+@export var resource_UI_node_label: NodePath
