@@ -16,47 +16,47 @@ func _ready():
 	spawn_unit_timer()
 	
 func _initilize_agent(spawn_position: Vector2,
-                      main_building_scene_path: String,
-                      resource_UI_node_path: NodePath,
-                      agent_name: String = "Agent") -> void:
-    
-    main_building_position = spawn_position
-    
-    # Initialize resources
-    resources = $Resources
-    if not resources:
-        print("ERROR: Resources node not found on agent!")
-    else:
-        print("Agent initialized with resources:")
-        print("PRIMARY: ", resources.PRIMARY_RESOURCE)
-        print("SECONDARY: ", resources.SECONDARY_RESOURCE)
+					  main_building_scene_path: String,
+					  resource_UI_node_path: NodePath,
+					  agent_name: String = "Agent") -> void:
+	
+	main_building_position = spawn_position
+	
+	# Initialize resources
+	resources = $Resources
+	if not resources:
+		print("ERROR: Resources node not found on agent!")
+	else:
+		print("Agent initialized with resources:")
+		print("PRIMARY: ", resources.PRIMARY_RESOURCE)
+		print("SECONDARY: ", resources.SECONDARY_RESOURCE)
 
-        #Find the agent UI node for displaying resources and set it as the owner
-        var resource_UI_node = get_node(resource_UI_node_path)
-        print("Resource UI node found: ", resource_UI_node)
-        resource_UI_node.set_agent_owner(self)
-        resource_UI_node._agent_init()
-        add_resources(200, 4000)
+		#Find the agent UI node for displaying resources and set it as the owner
+		var resource_UI_node = get_node(resource_UI_node_path)
+		print("Resource UI node found: ", resource_UI_node)
+		resource_UI_node.set_agent_owner(self)
+		resource_UI_node._agent_init()
+		add_resources(200, 4000)
 
-    # Find the Buildings node in the scene
-    buildings_node = $Buildings
-    if not buildings_node:
-        print("ERROR: 'Buildings' node not found!")
-        # Create a Buildings node if it doesn't exist
-        buildings_node = Node2D.new()
-        buildings_node.name = "Buildings"
-        get_parent().add_child(buildings_node)
-        print("Created new Buildings node")
+	# Find the Buildings node in the scene
+	buildings_node = $Buildings
+	if not buildings_node:
+		print("ERROR: 'Buildings' node not found!")
+		# Create a Buildings node if it doesn't exist
+		buildings_node = Node2D.new()
+		buildings_node.name = "Buildings"
+		get_parent().add_child(buildings_node)
+		print("Created new Buildings node")
 
-    # Load the main building scene
-    main_building_scene = load(main_building_scene_path)
-    if not main_building_scene:
-        print("ERROR: Main building scene not found!")
-    else:
-        print("Main building scene loaded successfully!")
+	# Load the main building scene
+	main_building_scene = load(main_building_scene_path)
+	if not main_building_scene:
+		print("ERROR: Main building scene not found!")
+	else:
+		print("Main building scene loaded successfully!")
 
-        spawn_building(main_building_scene, "MainBuilding", spawn_position)
-        print("Main building for ", agent_name, " spawned at position: ", spawn_position)
+		spawn_building(main_building_scene, "MainBuilding", spawn_position)
+		print("Main building for ", agent_name, " spawned at position: ", spawn_position)
 
 
 # Function to spawn the main building
@@ -91,7 +91,6 @@ func spawn_building(building_scene: PackedScene, building_name, building_positio
 
 # Function to spawn a new unit if resources allow
 func spawn_unit() -> bool: #building: Node2D
-<<<<<<< HEAD
 	if not resources:
 		print("ERROR: Resources not available!")
 		return false
@@ -110,6 +109,7 @@ func spawn_unit() -> bool: #building: Node2D
 				# Check if we have enough resources
 				if resources.try_spawn_unit():
 					building.spawn_basic_unit()
+					resources.update_secondary_resource(resources.UNIT_PRIMARY_COST)
 					unit_spawned = true
 				else:
 					print("Failed to spawn unit: insufficient resources")
@@ -124,41 +124,6 @@ func spawn_unit() -> bool: #building: Node2D
 		print("ERROR: No buildings in array")
 		return false
 	return true
-=======
-    if not resources:
-        print("ERROR: Resources not available!")
-        return false
-    
-    var army_size = self.get_node("Army").get_children().size()
-    print("Army size: ", army_size)
-    emit_signal("unit_changed", army_size)
-    
-        # Resource check passed and resources have been deducted
-
-    if buildings.size() > 0:
-        var unit_spawned = false
-
-        for building in buildings:
-            if building.has_method("spawn_unit"):
-                # Check if we have enough resources
-                if resources.try_spawn_unit():
-                    building.spawn_basic_unit()
-                    resources.update_secondary_resource(resources.UNIT_PRIMARY_COST)
-                    unit_spawned = true
-                else:
-                    print("Failed to spawn unit: insufficient resources")
-                    return false
-            else:
-                print("WARNING: Building does not have spawn_unit method")
-
-        if not unit_spawned:
-            print("ERROR: No buildings were able to spawn a unit")
-            return false     
-    else:
-        print("ERROR: No buildings in array")
-        return false
-    return true
->>>>>>> e5b24b263cf8d393a5559eeba911b75fefe3fbfe
 
 
 # Function to add resources (for gathering/income)
