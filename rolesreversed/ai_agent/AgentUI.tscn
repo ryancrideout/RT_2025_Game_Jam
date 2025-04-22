@@ -1,4 +1,14 @@
-[gd_scene format=3 uid="uid://blpwoxyfaij34"]
+[gd_scene load_steps=10 format=3 uid="uid://blpwoxyfaij34"]
+
+[ext_resource type="Texture2D" uid="uid://cvh5i0ltfdjlo" path="res://ai_agent/bone.png" id="1_0jogs"]
+[ext_resource type="Script" uid="uid://cngawrog6rt8f" path="res://ai_agent/agent_ui_labels.gd" id="1_vguod"]
+[ext_resource type="Texture2D" uid="uid://b4ua8ul8n5fs8" path="res://ai_agent/skeleton.png" id="3_76554"]
+[ext_resource type="Texture2D" uid="uid://bdf03wjmpywq8" path="res://ai_agent/bone fort.png" id="4_dnjuy"]
+[ext_resource type="Texture2D" uid="uid://b6oxcfj7jv27t" path="res://ai_agent/gravestone.png" id="5_yumxu"]
+[ext_resource type="Texture2D" uid="uid://d4e8mexlrj83p" path="res://ai_agent/bread.png" id="6_85dim"]
+[ext_resource type="Texture2D" uid="uid://cej4c0aghlg1e" path="res://ai_agent/human.png" id="8_noxk2"]
+[ext_resource type="Texture2D" uid="uid://nvetwng2npwa" path="res://ai_agent/human town.png" id="9_vl61t"]
+[ext_resource type="Texture2D" uid="uid://d3vc8to4548ck" path="res://ai_agent/jonathan-dulcahn-dodd-skull-and-sword.png" id="10_j0lax"]
 
 [node name="AgentUI" type="Control"]
 layout_mode = 3
@@ -51,12 +61,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer"]
+[node name="UndeadVBoxContainer" type="VBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+script = ExtResource("1_vguod")
 
-[node name="Label" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -64,109 +76,217 @@ size_flags_stretch_ratio = 0.25
 text = "Skeleton Army"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+texture = ExtResource("1_0jogs")
+expand_mode = 2
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="PrimaryResource" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "bones"
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+texture = ExtResource("3_76554")
+expand_mode = 2
+stretch_mode = 5
 
-[node name="Label3" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="BasicUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "skele1"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+texture = ExtResource("4_dnjuy")
+expand_mode = 2
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Outposts" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "bases"
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Label3" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="RangedUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "skele2"
 horizontal_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
+texture = ExtResource("5_yumxu")
+expand_mode = 2
+stretch_mode = 5
 
-[node name="Label2" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="Kills" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "kills"
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="Label3" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="SpecialUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "skele3"
 horizontal_alignment = 1
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/ResourcesContainer/HBoxContainer"]
+[node name="HumanVBoxContainer" type="VBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.5
+script = ExtResource("1_vguod")
 
-[node name="Label" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/Panel2"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -57.0
-offset_right = 56.0
-offset_bottom = 23.0
-grow_horizontal = 2
+[node name="Label" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer"]
+layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.25
 text = "Human Army"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("6_85dim")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="PrimaryResource" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "food"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("8_noxk2")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="BasicUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "human1"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("9_vl61t")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Outposts" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "bases"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="RangedUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "skele2"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+texture = ExtResource("10_j0lax")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Kills" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "kills"
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="SpecialUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "skele3"
 horizontal_alignment = 1
 
 [node name="MenuContainer" type="Panel" parent="VBoxContainer"]

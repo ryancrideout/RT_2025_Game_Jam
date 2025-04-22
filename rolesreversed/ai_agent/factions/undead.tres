@@ -10,3 +10,4 @@ basic_unit_scene = ExtResource("1_w0bgq")
 basic_unit_name = "Skeleton"
 ranged_unit_name = ""
 special_unit_name = ""
+resource_UI_node_label = NodePath("VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer")
