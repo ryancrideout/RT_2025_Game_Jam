@@ -34,6 +34,16 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_SPACE):
 		global_position.x = grim_reaper.position[0]
 		global_position.y = grim_reaper.position[1] 
+		zoom.x = 1.0
+		zoom.y = 1.0
+		
+	if Input.is_action_just_released('mouse_wheel_down'):
+		zoom.x -= 0.1
+		zoom.y -= 0.1
+		
+	if Input.is_action_just_released('mouse_wheel_up'):
+		zoom.x += 0.1
+		zoom.y += 0.1
 
 func set_width(new_width: int):
 	camera_width = new_width

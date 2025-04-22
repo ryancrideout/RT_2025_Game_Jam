@@ -100,8 +100,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			state = states[0]
 
 func is_still_valid_target(body) -> bool:
-	if body.state != states[4] and is_instance_valid(body):
-		return true
+	if is_instance_valid(body):
+		if body.state != states[4]:
+			return true
+		else:
+			return false
 	else:
 		return false
 
