@@ -36,7 +36,7 @@ func _initilize_agent(spawn_position: Vector2,
         print("Resource UI node found: ", resource_UI_node)
         resource_UI_node.set_agent_owner(self)
         resource_UI_node._agent_init()
-        add_resources(200, 200)
+        add_resources(200, 4000)
 
     # Find the Buildings node in the scene
     buildings_node = $Buildings
@@ -109,6 +109,7 @@ func spawn_unit() -> bool: #building: Node2D
                 # Check if we have enough resources
                 if resources.try_spawn_unit():
                     building.spawn_basic_unit()
+                    resources.update_secondary_resource(resources.UNIT_PRIMARY_COST)
                     unit_spawned = true
                 else:
                     print("Failed to spawn unit: insufficient resources")
