@@ -1,11 +1,44 @@
-[gd_scene load_steps=21 format=3 uid="uid://d0fwysjdvpqp0"]
+[gd_scene load_steps=30 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bd7g50fbcotdx" path="res://ai_agent/assets/Swordsman_Idle.png" id="2_aqsar"]
+[ext_resource type="Texture2D" uid="uid://dsfn4hfpxw26q" path="res://ai_agent/assets/Swordsman_Death.png" id="2_djq37"]
 [ext_resource type="Texture2D" uid="uid://em3o77v36pbm" path="res://ai_agent/assets/Swordsman_Walking.png" id="3_07khc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
 size = Vector2(62, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urtba"]
+atlas = ExtResource("2_djq37")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wd1vw"]
+atlas = ExtResource("2_djq37")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbka7"]
+atlas = ExtResource("2_djq37")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5e41"]
+atlas = ExtResource("2_djq37")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj7pw"]
+atlas = ExtResource("2_djq37")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x0fec"]
+atlas = ExtResource("2_djq37")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn8xj"]
+atlas = ExtResource("2_djq37")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2mp6"]
+atlas = ExtResource("2_djq37")
+region = Rect2(700, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_07khc"]
 atlas = ExtResource("2_aqsar")
@@ -69,6 +102,35 @@ region = Rect2(560, 0, 80, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u0ham"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urtba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wd1vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbka7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5e41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj7pw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x0fec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mn8xj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2mp6")
+}],
+"loop": false,
+"name": &"Dying",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_07khc")
@@ -135,4 +197,8 @@ shape = SubResource("RectangleShape2D_oklfc")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 1)
 sprite_frames = SubResource("SpriteFrames_u0ham")
-animation = &"Movement"
+animation = &"Dying"
+frame = 7
+frame_progress = 0.14698
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
