@@ -134,7 +134,7 @@ func spawn_special_unit():
 
 func spawn_outpost_timer() -> void:
 	var timer = Timer.new()
-	timer.wait_time = 1.0
+	timer.wait_time = 10.0
 	timer.one_shot = false
 	timer.name = "SpawnOutpostTimer"
 	timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))
@@ -167,21 +167,3 @@ func _on_spawn_outpost_timer_timeout() -> void:
 
 func spawn_outpost(outpost, outpost_name: String, new_spawn_position) -> void:
 	agent_owner.spawn_building(outpost, outpost_name, new_spawn_position)
-	# var outpost_instance = outpost.instantiate()
-	
-	# if not outpost_instance:
-	#     print("ERROR: Failed to instantiate outpost scene!")
-	#     return
-	
-	# # Set the position of the outpost
-	# outpost_instance.position = new_spawn_position
-	# outpost_instance.set_name(outpost_name + "_" + "%06X" % int(randf_range(0, 0xFFFFFF)))
-	
-	# # Add the outpost to the buildings node
-	# if agent_owner and agent_owner.has_node("Buildings"):
-	#     agent_owner.get_node("Buildings").add_child(outpost_instance)
-	# else:
-	#     print("ERROR: Buildings node not found in agent owner!")
-	#     return
-	
-	# print("Outpost spawned successfully!")
