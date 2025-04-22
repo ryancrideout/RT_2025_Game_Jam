@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bk04t8ig150fr"]
+[gd_scene load_steps=15 format=3 uid="uid://bk04t8ig150fr"]
 
 [ext_resource type="Texture2D" uid="uid://c4fbhe40i1gua" path="res://grim_reaper/assets/Promote.png" id="1_gsmwm"]
 [ext_resource type="Script" uid="uid://j6hptunfidj1" path="res://grim_reaper/GrimReaperUI.gd" id="1_t5gxf"]
@@ -13,6 +13,38 @@ border_width_top = 4
 border_width_right = 4
 border_width_bottom = 4
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="InputEventKey" id="InputEventKey_t5gxf"]
+device = -1
+keycode = 49
+unicode = 49
+
+[sub_resource type="Shortcut" id="Shortcut_22ifn"]
+events = [SubResource("InputEventKey_t5gxf")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_mn1u1"]
+device = -1
+keycode = 50
+unicode = 50
+
+[sub_resource type="Shortcut" id="Shortcut_udpyk"]
+events = [SubResource("InputEventKey_mn1u1")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_clubq"]
+device = -1
+keycode = 51
+unicode = 51
+
+[sub_resource type="Shortcut" id="Shortcut_12qs4"]
+events = [SubResource("InputEventKey_clubq")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_6csqr"]
+device = -1
+keycode = 52
+unicode = 52
+
+[sub_resource type="Shortcut" id="Shortcut_bqlfm"]
+events = [SubResource("InputEventKey_6csqr")]
 
 [node name="GrimReaperUI" type="Control"]
 layout_mode = 3
@@ -42,23 +74,32 @@ theme_override_constants/separation = 40
 [node name="PromoteButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+shortcut = SubResource("Shortcut_22ifn")
 text = "1"
 icon = ExtResource("1_gsmwm")
 
 [node name="StasisButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+shortcut = SubResource("Shortcut_udpyk")
 text = "2"
 icon = ExtResource("2_t5gxf")
 
 [node name="HasteButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+shortcut = SubResource("Shortcut_12qs4")
 text = "3"
 icon = ExtResource("3_22ifn")
 
 [node name="CorpseExplosionButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
+shortcut = SubResource("Shortcut_bqlfm")
 text = "4"
 icon = ExtResource("4_mn1u1")
+
+[connection signal="pressed" from="HBoxContainer/PromoteButton" to="." method="_on_promote_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/StasisButton" to="." method="_on_stasis_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/HasteButton" to="." method="_on_haste_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/CorpseExplosionButton" to="." method="_on_corpse_explosion_button_pressed"]
