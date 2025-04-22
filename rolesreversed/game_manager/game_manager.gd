@@ -7,8 +7,8 @@ func _ready():
 
 func _on_play_button_pressed():
     # Spawn two agents with different positions and names
-    spawn_agent(Vector2(1000, 5000), "res://ai_agent/skeleton_castle.tscn", "SkeletonAgent")
-    spawn_agent(Vector2(9000, 5000), "res://ai_agent/human_castle.tscn", "HumanAgent")
+    spawn_agent(Vector2(3500, 5000), "res://ai_agent/skeleton_castle.tscn", "SkeletonAgent")
+    spawn_agent(Vector2(6500, 5000), "res://ai_agent/human_castle.tscn", "HumanAgent")
     
     print("Spawned two agents!")
     
