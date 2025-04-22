@@ -239,10 +239,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dbvrr"]
-size = Vector2(32, 89.2897)
+size = Vector2(32, 101.195)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okq2j"]
-size = Vector2(70, 104.171)
+size = Vector2(70, 101.195)
 
 [node name="Skeleton" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
@@ -254,14 +254,14 @@ sprite_frames = SubResource("SpriteFrames_uyysq")
 animation = &"Windup"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1.48816)
+position = Vector2(1, 7.44081)
 shape = SubResource("RectangleShape2D_dbvrr")
 
 [node name="AttackRange" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="AttackBox" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2(0, 2.97632)
+position = Vector2(0, 7.44081)
 shape = SubResource("RectangleShape2D_okq2j")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

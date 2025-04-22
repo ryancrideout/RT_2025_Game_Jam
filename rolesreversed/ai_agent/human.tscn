@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d0fwysjdvpqp0"]
+[gd_scene load_steps=40 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
@@ -248,6 +248,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
 size = Vector2(28, 86.3134)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3a1dp"]
+size = Vector2(66, 86.3134)
+
 [node name="Human" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_aqsar")
@@ -261,4 +264,11 @@ animation = &"Idle"
 position = Vector2(0, 4.46448)
 shape = SubResource("RectangleShape2D_oklfc")
 
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="AttackBox" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2(0, 4.46449)
+shape = SubResource("RectangleShape2D_3a1dp")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

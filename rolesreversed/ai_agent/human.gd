@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Human
 
-var target
+var target = null
 var health := 35.0
 var damage := 7.5
 var speed: float = -4800.0
@@ -39,9 +39,12 @@ func _process(delta: float):
 	if lifetime <= 0 and state != states[4]:
 		die()
 		
-	if health <= 0:
-		print("I was killed by society!!")
+	if health <= 0 and state != states[4]:
 		die()
+
+	if target != null and state not in active_states:
+		# Windup for attack
+		state = states[2]
 
 func sprite_management():
 	if state not in active_states:
@@ -55,6 +58,24 @@ func sprite_management():
 			_animated_sprite.flip_h = false
 		else:
 			_animated_sprite.flip_h = true
+			
+	# Windup
+	if state == states[2]:
+		if is_instance_valid(target):
+			if target.position.x < position.x:
+				_animated_sprite.flip_h = true
+			else:
+				_animated_sprite.flip_h = false
+		_animated_sprite.play(states[2])
+		
+	# Attacking
+	if state == states[3]:
+		if is_instance_valid(target):
+			if target.position.x < position.x:
+				_animated_sprite.flip_h = true
+			else:
+				_animated_sprite.flip_h = false
+		_animated_sprite.play(states[3])
 
 func die():
 	state = states[4]
@@ -63,6 +84,30 @@ func die():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == "Dying":
 		queue_free()
+		
+	if _animated_sprite.animation == "Windup":
+		# Set state to be attacking
+		state = states[3]
+		if is_instance_valid(target):
+			target.receive_damage(damage)
+		
+	if _animated_sprite.animation == "Attacking":
+		if is_still_valid_target(target):
+			# Windup for the next attack
+			state = state[2]
+		else:
+			target = null
+			state = states[0]
+
+func is_still_valid_target(body) -> bool:
+	if body.state != states[4] and is_instance_valid(body):
+		return true
+	else:
+		return false
 
 func receive_damage(incoming_damage):
 	health -= incoming_damage
+
+func _on_attack_range_body_entered(body: Node2D) -> void:
+	if body is Skeleton:
+		target = body

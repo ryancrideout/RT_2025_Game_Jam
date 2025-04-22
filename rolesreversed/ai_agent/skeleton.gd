@@ -5,7 +5,7 @@ class_name Skeleton
 var target = null
 var health := 12.0
 var damage := 8.0
-var speed: float = 64000.0
+var speed: float = 6400.0
 var lifetime: float = 20.0
 @onready var _animated_sprite = $AnimatedSprite2D
 
@@ -39,14 +39,12 @@ func _process(delta: float):
 	if lifetime <= 0 and state != states[4]:
 		die()
 	
-	if health <= 0:
-		print("OOF")
+	if health <= 0 and state != states[4]:
 		die()
 		
 	if target != null and state not in active_states:
 		# Windup for attack
 		state = states[2]
-
 
 func sprite_management():
 	if state not in active_states:
@@ -63,10 +61,20 @@ func sprite_management():
 			
 	# Windup
 	if state == states[2]:
+		if is_instance_valid(target):
+			if target.position.x < position.x:
+				_animated_sprite.flip_h = true
+			else:
+				_animated_sprite.flip_h = false
 		_animated_sprite.play(states[2])
 		
 	# Attacking
 	if state == states[3]:
+		if is_instance_valid(target):
+			if target.position.x < position.x:
+				_animated_sprite.flip_h = true
+			else:
+				_animated_sprite.flip_h = false
 		_animated_sprite.play(states[3])
 
 func die():
@@ -80,7 +88,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == "Windup":
 		# Set state to be attacking
 		state = states[3]
-		target.receive_damage(damage)
+		if is_instance_valid(target):
+			target.receive_damage(damage)
 		
 	if _animated_sprite.animation == "Attacking":
 		if is_still_valid_target(target):
@@ -90,7 +99,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			target = null
 			state = states[0]
 
-func is_still_valid_target(body: Human) -> bool:
+func is_still_valid_target(body) -> bool:
 	if body.state != states[4] and is_instance_valid(body):
 		return true
 	else:
