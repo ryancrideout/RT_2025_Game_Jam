@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var camera = $PlayerCamera
+@onready var hitbox = $Hitbox
+@onready var hitbox_shape = $Hitbox/HitboxShape
 @export var speed = 625
 
 var states = {
@@ -13,6 +15,7 @@ var states = {
 var state
 var active_states = [states[2], states[3]]
 var attack_position = Vector2.ZERO
+var damage = 20.0
 
 func _ready() -> void:
 	camera.make_current()
@@ -81,6 +84,18 @@ func state_management() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	# Windup has finished
 	if _animated_sprite.animation == states[2]:
+		# Flip the attack hitbox if we need to.
+		if _animated_sprite.flip_h == true:
+			hitbox_shape.scale.x = -1.0
+		else:
+			hitbox_shape.scale.x = 1.0
+			
+		# Get the bodies, apply damage.
+		var victims = hitbox.get_overlapping_bodies()
+		for victim in victims:
+			if victim is Human or victim is Skeleton:
+				victim.receive_damage(damage)
+
 		# State is attacking
 		state = states[3]
 	
