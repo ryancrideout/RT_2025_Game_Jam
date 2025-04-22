@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+class_name Human
+
+var target
+var health := 35.0
+var damage := 7.5
 var speed: float = -4800.0
 var lifetime: float = 20.0
 @onready var _animated_sprite = $AnimatedSprite2D
@@ -33,6 +38,10 @@ func _process(delta: float):
 	# If lifetime hits zero and isn't already dying.
 	if lifetime <= 0 and state != states[4]:
 		die()
+		
+	if health <= 0:
+		print("I was killed by society!!")
+		die()
 
 func sprite_management():
 	if state not in active_states:
@@ -54,3 +63,6 @@ func die():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == "Dying":
 		queue_free()
+
+func receive_damage(incoming_damage):
+	health -= incoming_damage
