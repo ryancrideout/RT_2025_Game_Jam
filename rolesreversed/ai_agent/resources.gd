@@ -8,7 +8,7 @@ var SECONDARY_RESOURCE: int = 50
 
 # Constants for resource costs
 const UNIT_PRIMARY_COST: int = 10
-const UNIT_SECONDARY_COST: int = 5
+const UNIT_SECONDARY_COST: int = 0
 
 const OUTPOST_PRIMARY_COST: int = 100
 const OUTPOST_SECONDARY_COST: int = 0
