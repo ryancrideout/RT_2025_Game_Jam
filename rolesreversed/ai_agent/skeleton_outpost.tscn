@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwowu8tnourpo"]
+[gd_scene load_steps=5 format=3 uid="uid://ce5osxqcae37a"]
 
 [ext_resource type="Texture2D" uid="uid://bdf03wjmpywq8" path="res://ai_agent/bone fort.png" id="1_nnlp3"]
 [ext_resource type="Script" uid="uid://cnlcv2lujg2od" path="res://ai_agent/building_spawner.gd" id="1_qsrw8"]
@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
 size = Vector2(200, 200)
 
-[node name="Outpost" type="Node2D"]
+[node name="SkeletonOutpost" type="Node2D"]
 script = ExtResource("1_qsrw8")
 faction_data = ExtResource("2_jrbjt")
 
