@@ -1,14 +1,40 @@
-[gd_scene load_steps=20 format=3 uid="uid://c8cf1yi5jtr4e"]
+[gd_scene load_steps=31 format=3 uid="uid://c8cf1yi5jtr4e"]
 
 [ext_resource type="Script" uid="uid://dspc8un85qtc6" path="res://grim_reaper/GrimReaper.gd" id="1_1nlnx"]
 [ext_resource type="Texture2D" uid="uid://cdi25ntraolhb" path="res://grim_reaper/assets/Grim_Reaper_Idle.png" id="2_6ixoq"]
+[ext_resource type="Texture2D" uid="uid://dnln3b0vfcuvn" path="res://grim_reaper/assets/Grim_Reaper_Attacking.png" id="2_nf3od"]
 [ext_resource type="Script" uid="uid://r58lhyimo3uu" path="res://grim_reaper/PlayerCamera.gd" id="3_6ixoq"]
 [ext_resource type="Texture2D" uid="uid://dkqp5udjk5omp" path="res://grim_reaper/assets/Grim_Reaper_Movement.png" id="3_carxk"]
 [ext_resource type="PackedScene" uid="uid://bk04t8ig150fr" path="res://grim_reaper/GrimReaperUI.tscn" id="5_5g1qx"]
+[ext_resource type="Texture2D" uid="uid://bt7rtydjm8q0q" path="res://grim_reaper/assets/Grim_Reaper_Windup.png" id="5_ayrcd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nlnx"]
 radius = 8.0
 height = 32.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctq6g"]
+atlas = ExtResource("2_nf3od")
+region = Rect2(0, 0, 200, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li2sk"]
+atlas = ExtResource("2_nf3od")
+region = Rect2(200, 0, 200, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ea3k"]
+atlas = ExtResource("2_nf3od")
+region = Rect2(400, 0, 200, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45otb"]
+atlas = ExtResource("2_nf3od")
+region = Rect2(600, 0, 200, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n85g"]
+atlas = ExtResource("2_nf3od")
+region = Rect2(800, 0, 200, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l7v63"]
+atlas = ExtResource("2_nf3od")
+region = Rect2(1000, 0, 200, 120)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_carxk"]
 atlas = ExtResource("2_6ixoq")
@@ -58,8 +84,43 @@ region = Rect2(360, 0, 90, 80)
 atlas = ExtResource("3_carxk")
 region = Rect2(450, 0, 90, 80)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_e20h0"]
+atlas = ExtResource("5_ayrcd")
+region = Rect2(0, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rjwr"]
+atlas = ExtResource("5_ayrcd")
+region = Rect2(120, 0, 120, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ktb3"]
+atlas = ExtResource("5_ayrcd")
+region = Rect2(240, 0, 120, 80)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_p7w5m"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctq6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li2sk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ea3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45otb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n85g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l7v63")
+}],
+"loop": false,
+"name": &"Attacking",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_carxk")
@@ -105,19 +166,33 @@ animations = [{
 "loop": true,
 "name": &"Movement",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e20h0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rjwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ktb3")
+}],
+"loop": false,
+"name": &"Windup",
+"speed": 12.0
 }]
 
 [node name="GrimReaper" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1nlnx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BodyShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(8, -6)
 shape = SubResource("CapsuleShape2D_1nlnx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7w5m")
-animation = &"Movement"
+animation = &"Idle"
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -127,3 +202,5 @@ script = ExtResource("3_6ixoq")
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="GrimReaperUI" parent="UILayer" instance=ExtResource("5_5g1qx")]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
