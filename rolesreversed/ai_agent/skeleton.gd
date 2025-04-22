@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed: float = 100.0
+var speed: float = 400.0
 var lifetime: float = 20.0
 
 func _ready():

@@ -12,6 +12,6 @@ class_name UnitData
     "SECONDARY": 0
 }
 @export var max_hp      : int  = 10
-@export var move_speed  : float = 4.0
+@export var move_speed  : float = 8.0
 @export var base_damage : int  = 2
 @export var bounty      : int  = 3        # reward on death
