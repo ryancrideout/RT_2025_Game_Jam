@@ -36,7 +36,7 @@ func _initilize_agent(spawn_position: Vector2,
         print("Resource UI node found: ", resource_UI_node)
         resource_UI_node.set_agent_owner(self)
         resource_UI_node._agent_init()
-        add_resources(100, 100)
+        add_resources(200, 200)
 
     # Find the Buildings node in the scene
     buildings_node = $Buildings

@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://breoyu6ywtjne" path="res://ai_agent/factions/undead.tres" id="2_nb3pw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
-size = Vector2(925, 815)
+size = Vector2(700, 800)
 
 [node name="SkeletonCastle" type="Node2D"]
 scale = Vector2(0.5, 0.5)
@@ -13,7 +13,6 @@ script = ExtResource("1_qvusm")
 faction_data = ExtResource("2_nb3pw")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.5, 34.5)

@@ -10,4 +10,7 @@ basic_unit_scene = ExtResource("1_kxl0i")
 basic_unit_name = "Human"
 ranged_unit_name = ""
 special_unit_name = ""
+outpost_scene_path = "res://ai_agent/human_outpost.tscn"
+outpost_name = "Human Outpost"
+faction_direction = -1
 resource_UI_node_label = NodePath("VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer")

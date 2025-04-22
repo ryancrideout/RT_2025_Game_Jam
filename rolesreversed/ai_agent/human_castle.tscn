@@ -5,14 +5,14 @@
 [ext_resource type="Resource" uid="uid://c6p3jow2vji4g" path="res://ai_agent/factions/humans.tres" id="2_rd8ed"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
-size = Vector2(393, 448)
+size = Vector2(700, 800)
 
 [node name="HumanCastle" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_cw16t")
 faction_data = ExtResource("2_rd8ed")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-4.5, 14)
@@ -20,5 +20,4 @@ shape = SubResource("RectangleShape2D_oklfc")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(0, 10)
-scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_cw16t")
