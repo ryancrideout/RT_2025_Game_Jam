@@ -23,7 +23,7 @@ func _process(_delta):
 	state_management()
 	sprite_management()
 
-func _physics_process(_sdelta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
 
