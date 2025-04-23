@@ -36,7 +36,7 @@ func _initilize_agent(spawn_position: Vector2,
 		print("Resource UI node found: ", resource_UI_node)
 		resource_UI_node.set_agent_owner(self)
 		resource_UI_node._agent_init()
-		add_resources(200, 4000)
+		add_resources(200, 1000)
 
 	# Find the Buildings node in the scene
 	buildings_node = $Buildings
@@ -127,7 +127,7 @@ func spawn_unit() -> bool: #building: Node2D
 
 
 # Function to add resources (for gathering/income)
-func add_resources(primary_amount: float, secondary_amount: float) -> void:
+func add_resources(primary_amount: int, secondary_amount: int) -> void:
 	if resources:
 		resources.update_primary_resource(primary_amount)
 		resources.update_secondary_resource(secondary_amount)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://4wl5k20v84xp"]
+[gd_scene load_steps=11 format=3 uid="uid://4wl5k20v84xp"]
 
 [ext_resource type="Texture2D" uid="uid://bdf03wjmpywq8" path="res://ai_agent/bone fort.png" id="1_j1mjq"]
 [ext_resource type="Script" uid="uid://cnlcv2lujg2od" path="res://ai_agent/building_spawner.gd" id="1_qvusm"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://dd5u8sk16pk36" path="res://ai_agent/necroticaura.gdshader" id="3_0bwi8"]
 [ext_resource type="Texture2D" uid="uid://b00nvjcxpmyae" path="res://ai_agent/necrotic aura.png" id="3_ojiu0"]
 [ext_resource type="Script" uid="uid://bfxx16rlgt01n" path="res://ai_agent/necrotic_aura.gd" id="3_tx830"]
+[ext_resource type="Script" uid="uid://bljif0yrbhm7t" path="res://ai_agent/resource_generator.gd" id="7_7vop5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nb3pw"]
 radius = 500.0
@@ -18,7 +19,6 @@ shader_parameter/base_alpha = 0.4
 size = Vector2(700, 800)
 
 [node name="SkeletonCastle" type="Node2D"]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_qvusm")
 faction_data = ExtResource("2_nb3pw")
 
@@ -35,6 +35,7 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_ojiu0")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.5, 34.5)
@@ -43,3 +44,7 @@ shape = SubResource("RectangleShape2D_oklfc")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(0, 10)
 texture = ExtResource("1_j1mjq")
+
+[node name="ResourceGenerator" type="Node" parent="."]
+script = ExtResource("7_7vop5")
+faction_data = ExtResource("2_nb3pw")
