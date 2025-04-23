@@ -83,6 +83,6 @@ func start_damage_timer():
 func _on_damage_timer_timeout():
     for body in self.get_overlapping_bodies():
         if body is Skeleton:
-            body.receive_damage(-incoming_damage)
+            body.receive_damage(-incoming_damage*0.2)
         elif body is Human:
             body.receive_damage(incoming_damage)

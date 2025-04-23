@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d0fwysjdvpqp0"]
+[gd_scene load_steps=43 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
@@ -232,6 +232,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_h2mp6")
+}],
+"loop": false,
+"name": &"Stasis",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3vj7q")
 }, {
 "duration": 1.0,
@@ -257,6 +265,9 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8rpw"]
 bg_color = Color(0.133365, 0.289384, 0.880571, 1)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3a1dp"]
+radius = 30.0
+
 [node name="Human" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_aqsar")
@@ -264,7 +275,7 @@ script = ExtResource("1_aqsar")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 1)
 sprite_frames = SubResource("SpriteFrames_u0ham")
-animation = &"Idle"
+animation = &"Stasis"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -289,6 +300,11 @@ max_value = 35.0
 step = 0.0
 value = 35.0
 show_percentage = false
+
+[node name="ReviveArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea2D"]
+shape = SubResource("CircleShape2D_3a1dp")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

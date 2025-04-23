@@ -17,7 +17,7 @@ const OUTPOST_SECONDARY_COST: int = 0
 func update_primary_resource(amount: int) -> bool:
     # If subtracting resources, check if there's enough
     if amount < 0 and PRIMARY_RESOURCE + amount < 0:
-        print("ERROR: Not enough PRIMARY_RESOURCE available. Current: ", PRIMARY_RESOURCE, ", Requested: ", -amount)
+        #print("ERROR: Not enough PRIMARY_RESOURCE available. Current: ", PRIMARY_RESOURCE, ", Requested: ", -amount)
         return false
         
     # Update resource value
@@ -34,7 +34,7 @@ func update_primary_resource(amount: int) -> bool:
 func update_secondary_resource(amount: int) -> bool:
     # If subtracting resources, check if there's enough
     if amount < 0 and SECONDARY_RESOURCE + amount < 0:
-        print("ERROR: Not enough SECONDARY_RESOURCE available. Current: ", SECONDARY_RESOURCE, ", Requested: ", -amount)
+        #print("ERROR: Not enough SECONDARY_RESOURCE available. Current: ", SECONDARY_RESOURCE, ", Requested: ", -amount)
         return false
         
     # Update resource value
@@ -52,9 +52,9 @@ func can_spawn_unit() -> bool:
     if PRIMARY_RESOURCE >= UNIT_PRIMARY_COST and SECONDARY_RESOURCE >= UNIT_SECONDARY_COST:
         return true
     else:
-        print("ERROR: Not enough resources to spawn unit.")
-        print("Required: ", UNIT_PRIMARY_COST, " PRIMARY, ", UNIT_SECONDARY_COST, " SECONDARY")
-        print("Available: ", PRIMARY_RESOURCE, " PRIMARY, ", SECONDARY_RESOURCE, " SECONDARY")
+        #print("ERROR: Not enough resources to spawn unit.")
+        #print("Required: ", UNIT_PRIMARY_COST, " PRIMARY, ", UNIT_SECONDARY_COST, " SECONDARY")
+        #print("Available: ", PRIMARY_RESOURCE, " PRIMARY, ", SECONDARY_RESOURCE, " SECONDARY")
         return false
 
 # Try to use resources to spawn a unit
