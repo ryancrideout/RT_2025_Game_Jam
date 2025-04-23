@@ -16,27 +16,26 @@ var health := 200
 var parent_building: Node = null
 var agent_owner: Node = null
 
-
 @export var faction_data: Resource
 
 func _ready():
 
-    if not faction_data:
-        push_error("Invalid or missing faction data!")
-        return
-        
-    # Get reference to the parent building
-    parent_building = get_parent()
-    
-    # Try to find the agent that owns this building
-    if parent_building and parent_building.has_method("get_agent_owner"):
-        agent_owner = parent_building.get_agent_owner()
+	if not faction_data:
+		push_error("Invalid or missing faction data!")
+		return
+		
+	# Get reference to the parent building
+	parent_building = get_parent()
+	
+	# Try to find the agent that owns this building
+	if parent_building and parent_building.has_method("get_agent_owner"):
+		agent_owner = parent_building.get_agent_owner()
 
-    spawn_outpost_timer()
+	spawn_outpost_timer()
 
 func _process(_delta: float) -> void:
-    if health <= 0:
-        queue_free()
+	if health <= 0:
+		queue_free()
 
 func set_agent_owner(agent: Node) -> void:
 	agent_owner = agent
@@ -141,11 +140,6 @@ func spawn_special_unit():
 	self.spawn_unit(faction_data.special_unit_scene, faction_data.special_unit_name)
 
 
-
-#
-#
-#
-
 func spawn_outpost_timer() -> void:
 	var timer = Timer.new()
 	timer.wait_time = 15.0
@@ -179,8 +173,7 @@ func _on_spawn_outpost_timer_timeout() -> void:
 	else:
 		print("Failed to spawn building: insufficient resources")
 		pass
-	
-	
+
 func spawn_outpost(outpost, outpost_name: String, new_spawn_position) -> void:
 	agent_owner.spawn_building(outpost, outpost_name, new_spawn_position)
 
