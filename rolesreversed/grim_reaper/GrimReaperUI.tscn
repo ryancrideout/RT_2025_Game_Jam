@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d1e00wm5gssdw" path="res://grim_reaper/assets/necrotic energy bar.png" id="2_mn1u1"]
 [ext_resource type="Texture2D" uid="uid://cfxw4kce5pjl8" path="res://grim_reaper/assets/Stasis.png" id="2_t5gxf"]
 [ext_resource type="Texture2D" uid="uid://bkn36gvije4u" path="res://grim_reaper/assets/Haste.png" id="3_22ifn"]
-[ext_resource type="Script" path="res://grim_reaper/reaper_progress_bar_energy.gd" id="3_udpyk"]
+[ext_resource type="Script" uid="uid://dy1mualjhd15o" path="res://grim_reaper/reaper_progress_bar_energy.gd" id="3_udpyk"]
 [ext_resource type="Texture2D" uid="uid://dtkswhj6f3ups" path="res://grim_reaper/assets/Corpse_Explosion.png" id="4_mn1u1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_172a3"]

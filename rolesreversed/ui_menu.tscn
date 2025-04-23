@@ -3,26 +3,22 @@
 [ext_resource type="Script" uid="uid://bu6askj3ttbkc" path="res://play_button.gd" id="1_gww7l"]
 
 [node name="UI Menu" type="Control"]
-custom_minimum_size = Vector2(500, 500)
+custom_minimum_size = Vector2(500, 200)
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.434
+anchor_bottom = 0.309
+offset_right = 0.0319824
+offset_bottom = -0.23201
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Play Button" type="Button" parent="."]
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -15.5
-offset_right = 50.0
-offset_bottom = 15.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
