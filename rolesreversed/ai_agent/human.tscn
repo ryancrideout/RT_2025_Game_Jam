@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://d0fwysjdvpqp0"]
+[gd_scene load_steps=44 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
@@ -268,6 +268,9 @@ bg_color = Color(0.133365, 0.289384, 0.880571, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_3a1dp"]
 radius = 30.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8rpw"]
+size = Vector2(400, 400)
+
 [node name="Human" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_aqsar")
@@ -305,6 +308,12 @@ show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea2D"]
 shape = SubResource("CircleShape2D_3a1dp")
+
+[node name="VisionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea2D"]
+position = Vector2(-150, 0)
+shape = SubResource("RectangleShape2D_m8rpw")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

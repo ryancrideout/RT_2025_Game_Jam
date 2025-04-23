@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 class_name Skeleton
 
-var target = null
+@export var target = null
+@export var vision_target = null
 var health := 12.0
 var damage := 8.0
 var speed: float = 6400.0
@@ -11,6 +12,7 @@ var lifetime: float = 2000.0
 @onready var health_bar = $HealthBar
 
 var stasis_timer = Timer.new()
+var vision_timer = Timer.new()
 
 var states = {
     0: "Idle",
@@ -34,10 +36,19 @@ func _ready():
     stasis_timer.connect("timeout", Callable(self, "_on_stasis_timeout"))
     add_child(stasis_timer)
 
+    vision_timer.wait_time = 1.0
+    vision_timer.one_shot = false
+    vision_timer.connect("timeout", Callable(self, "find_new_target_in_vision"))
+    add_child(vision_timer)
+    vision_timer.start()
+
 func _physics_process(delta: float) -> void:
     # If not dying
-    if state != states[4]:
-        velocity.x = speed * delta
+    if state not in active_states:
+        if is_instance_valid(vision_target):
+            velocity = (vision_target.position - position).normalized() * speed * delta
+        else:
+            velocity = Vector2.RIGHT * speed * delta
         move_and_slide()
     else:
         velocity = Vector2.ZERO
@@ -100,7 +111,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
         _animated_sprite.play("Stasis")
         stasis()
         
-        
     if _animated_sprite.animation == "Windup":
         # Set state to be attacking
         state = states[3]
@@ -113,6 +123,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
             state = state[2]
         else:
             target = null
+            vision_target = find_new_target_in_vision()
             state = states[0]
 
 func stasis():
@@ -164,8 +175,23 @@ func is_still_valid_target(body) -> bool:
     else:
         return false
         
-func receive_damage(incoming_damage):
-    health -= incoming_damage
+func find_new_target_in_vision():
+    if target == null:
+        var vision_area = get_node("VisionArea2D")
+        var overlapping_bodies = vision_area.get_overlapping_bodies()
+        
+        for body in overlapping_bodies:
+            if body is StaticBody2D:
+                if body is Building:
+                    if body.get_parent().faction_data.faction_name == "Human":
+                        vision_target = body.get_parent()
+                        return
+            if body is Human:
+                if body.state != states[5]:  # Ensure the human is not in "Stasis"
+                    vision_target = body
+                return
+    else:
+        pass
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
     if body is StaticBody2D:
@@ -174,6 +200,9 @@ func _on_attack_range_body_entered(body: Node2D) -> void:
                 target = body.get_parent()
     if body is Human:
         target = body
+
+func receive_damage(incoming_damage):
+    health -= incoming_damage
 
 func update_health_bar():
     if health_bar.value > health:
