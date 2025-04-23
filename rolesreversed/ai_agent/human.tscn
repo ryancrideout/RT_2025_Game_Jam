@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=45 format=3 uid="uid://d0fwysjdvpqp0"]
+
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
@@ -273,6 +275,10 @@ radius = 30.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8rpw"]
 size = Vector2(400, 400)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8rpw"]
+radius = 100.0
+height = 350.0
+
 [node name="Human" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_aqsar")
@@ -289,8 +295,10 @@ sprite_frames = SubResource("SpriteFrames_u0ham")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
 position = Vector2(6, 0)
 shape = SubResource("CapsuleShape2D_m8rpw")
+
 
 [node name="AttackRange" type="Area2D" parent="."]
 visible = false
@@ -312,17 +320,22 @@ value = 35.0
 show_percentage = false
 
 [node name="ReviveArea2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea2D"]
 shape = SubResource("CircleShape2D_3a1dp")
 
 [node name="VisionArea2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea2D"]
 visible = false
 position = Vector2(-150, 0)
 shape = SubResource("RectangleShape2D_m8rpw")
+
+[node name="CorpseExplosionArea" type="Area2D" parent="."]
+
+[node name="CorpseExplosionShape" type="CollisionShape2D" parent="CorpseExplosionArea"]
+shape = SubResource("CapsuleShape2D_m8rpw")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]

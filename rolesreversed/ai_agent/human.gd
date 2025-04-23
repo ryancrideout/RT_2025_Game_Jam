@@ -10,12 +10,15 @@ class_name Human
 
 var health := 35.0
 var damage := 7.5
+var base_speed: float = 4800.0
 var speed: float = 4800.0
 var lifetime: float = 2000.0
 var is_promoted = false
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
 @onready var star_sprite = $Star
+@onready var corpse_explosion_hitbox = $CorpseExplosionArea
+var corpse_explosion_damage: float = 450.0
 
 var stasis_timer = Timer.new()
 var vision_timer = Timer.new()
@@ -146,7 +149,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			state = states[0]
 
 func stasis():
-	set_collision_layer(0)
+	set_collision_layer(2)
 	set_collision_mask(0)
 	
 	health_bar.visible = false
@@ -223,6 +226,24 @@ func apply_promote():
 	if state not in inactive_states:
 		is_promoted = true
 		star_sprite.visible = true
-		health_bar.max_value += 22.0
-		health += 9.5
+		health_bar.max_value += 65.0
+		health += 35.0
 		damage += 4.5
+
+func apply_haste():
+	if state not in inactive_states:
+		_animated_sprite.speed_scale += 0.2
+		speed += 2800.0
+		
+func apply_stasis():
+	if state not in inactive_states:
+		_animated_sprite.speed_scale *= 0.8
+		speed *= 0.5
+
+func apply_corpse_explosion():
+	if state == states[5]:
+		var victims = corpse_explosion_hitbox.get_overlapping_bodies()
+		for victim in victims:
+			if victim is Human or victim is Skeleton:
+				victim.receive_damage(corpse_explosion_damage)
+		queue_free()
