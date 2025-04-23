@@ -1,10 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://c8cf1yi5jtr4e"]
+[gd_scene load_steps=43 format=3 uid="uid://c8cf1yi5jtr4e"]
 
 [ext_resource type="Script" uid="uid://dspc8un85qtc6" path="res://grim_reaper/GrimReaper.gd" id="1_1nlnx"]
 [ext_resource type="Texture2D" uid="uid://cdi25ntraolhb" path="res://grim_reaper/assets/Grim_Reaper_Idle.png" id="2_6ixoq"]
 [ext_resource type="Texture2D" uid="uid://dnln3b0vfcuvn" path="res://grim_reaper/assets/Grim_Reaper_Attacking.png" id="2_nf3od"]
+[ext_resource type="Texture2D" uid="uid://dwctn8ty0s2ew" path="res://grim_reaper/assets/Grim_Reaper_Casting.png" id="3_1tefo"]
 [ext_resource type="Script" uid="uid://r58lhyimo3uu" path="res://grim_reaper/PlayerCamera.gd" id="3_6ixoq"]
 [ext_resource type="Texture2D" uid="uid://dkqp5udjk5omp" path="res://grim_reaper/assets/Grim_Reaper_Movement.png" id="3_carxk"]
+[ext_resource type="Texture2D" uid="uid://dirv7gvgfxmps" path="res://grim_reaper/assets/Grim_Reaper_Casted.png" id="3_p7w5m"]
 [ext_resource type="PackedScene" uid="uid://bk04t8ig150fr" path="res://grim_reaper/GrimReaperUI.tscn" id="5_5g1qx"]
 [ext_resource type="Texture2D" uid="uid://bt7rtydjm8q0q" path="res://grim_reaper/assets/Grim_Reaper_Windup.png" id="5_ayrcd"]
 [ext_resource type="PackedScene" uid="uid://blpwoxyfaij34" path="res://ai_agent/AgentUI.tscn" id="7_ayrcd"]
@@ -36,6 +38,42 @@ region = Rect2(800, 0, 200, 120)
 [sub_resource type="AtlasTexture" id="AtlasTexture_l7v63"]
 atlas = ExtResource("2_nf3od")
 region = Rect2(1000, 0, 200, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sf17v"]
+atlas = ExtResource("3_p7w5m")
+region = Rect2(0, 0, 180, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wldh2"]
+atlas = ExtResource("3_p7w5m")
+region = Rect2(180, 0, 180, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in4v8"]
+atlas = ExtResource("3_p7w5m")
+region = Rect2(360, 0, 180, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14jim"]
+atlas = ExtResource("3_p7w5m")
+region = Rect2(540, 0, 180, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fahxc"]
+atlas = ExtResource("3_p7w5m")
+region = Rect2(720, 0, 180, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6216"]
+atlas = ExtResource("3_p7w5m")
+region = Rect2(900, 0, 180, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyf81"]
+atlas = ExtResource("3_1tefo")
+region = Rect2(0, 0, 140, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lp78"]
+atlas = ExtResource("3_1tefo")
+region = Rect2(140, 0, 140, 110)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nq2bs"]
+atlas = ExtResource("3_1tefo")
+region = Rect2(280, 0, 140, 110)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_carxk"]
 atlas = ExtResource("2_6ixoq")
@@ -124,6 +162,43 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_sf17v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wldh2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in4v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14jim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fahxc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6216")
+}],
+"loop": false,
+"name": &"Casted",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyf81")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lp78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nq2bs")
+}],
+"loop": true,
+"name": &"Casting",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_carxk")
 }, {
 "duration": 1.0,
@@ -194,7 +269,9 @@ shape = SubResource("CapsuleShape2D_1nlnx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p7w5m")
-animation = &"Attacking"
+animation = &"Casted"
+frame = 5
+frame_progress = 1.0
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -208,6 +285,7 @@ script = ExtResource("3_6ixoq")
 [node name="GrimReaperUI" parent="UILayer" instance=ExtResource("5_5g1qx")]
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="HitboxShape" type="CollisionPolygon2D" parent="Hitbox"]

@@ -11,17 +11,13 @@ signal haste_button_pressed
 signal corpse_explosion_button_pressed
 
 func _on_promote_button_pressed() -> void:
-	promote_button_pressed.emit()
-	print("Promote button pressed!")
+	promote_button_pressed.emit("Promote")
 
 func _on_stasis_button_pressed() -> void:
-	stasis_button_pressed.emit()
-	print("Stasis button pressed!")
+	stasis_button_pressed.emit("Stasis")
 
 func _on_haste_button_pressed() -> void:
-	haste_button_pressed.emit()
-	print("Haste button pressed!")
+	haste_button_pressed.emit("Haste")
 
 func _on_corpse_explosion_button_pressed() -> void:
-	corpse_explosion_button_pressed.emit()
-	print("Corpse Explosion button pressed!")
+	corpse_explosion_button_pressed.emit("Corpse_Explosion")
