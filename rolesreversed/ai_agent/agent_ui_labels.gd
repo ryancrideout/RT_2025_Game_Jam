@@ -21,7 +21,7 @@ func _agent_init() -> void:
 
     primary_label = $HBoxContainer/PrimaryResource  # Adjust this path to match your UI structure
     #secondary_label = $SecondaryLabel
-    print("Agent UI initialized with resources node: ", resources_node)
+    #print("Agent UI initialized with resources node: ", resources_node)
     resources_node.connect("resource_changed", Callable(self, "_on_resource_changed"))
     #resources_node.connect("resources_depleted", Callable(self, "_on_resources_depleted"))
 
@@ -36,26 +36,19 @@ func _on_building_changed(new_value):
     # Update the building display
     if building_label:
         building_label.text = str(new_value)
-        print("Building updated: ", new_value)
+        #print("Building updated: ", new_value)
 
 func update_primary_display(new_value):
     # Update the primary resource display
     if primary_label:
         primary_label.text = str(new_value)
-        print("Primary resource updated: ", new_value)
+        #print("Primary resource updated: ", new_value)
 
 func update_basic_unit_display(new_value):
     # Update the basic unit display
     if basic_unit_label:
         basic_unit_label.text = str(new_value)
-        print("Basic unit updated: ", new_value)
-
-# func _on_resources_depleted(resource_type):
-#     # Handle resource depletion
-#     if resource_type == "primary":
-#         show_primary_warning()
-#     elif resource_type == "secondary":
-#         show_secondary_warning()
+        #print("Basic unit updated: ", new_value)
 
 func set_agent_owner(agent: Node) -> void:
     agent_owner = agent

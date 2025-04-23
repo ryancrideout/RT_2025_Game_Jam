@@ -1,49 +1,59 @@
-# RT_2025_Game_Jam
-Timo and Ryan's 2025 Game Jam. The theme - Roles Reversed
+# Roles Reversed: A Necromancy Strategy Game
 
-# Notes:
-- **Game Concept**
-  - Creep Style game - nodes or something get placed down (without player influence?) and then it's autonomous to a degree. 
-  - **Mechanics**
-    - Creep Spread / Influence
-    - Maybe this is similar to Pandemic in terms of gameplay?
-      - Maybe this is a more passive game, like cookie clicker, so there will be less player involvement.
-      - Reverse They Are Billions
-    - Will the player place nodes? I think no.
-    - What can the player do?
-      - Purchase upgrades
-      - Research and Development
-      - Set / Prioritize objectives
-    - What objectives do we need?
-      - Magic (to fuel the growth / research?)
-      - Bodies (As a secondary resource)
-      - Arms and Armor (for the warriors to defend the kingdom - This would be upgrades)
-      - Gold (for the score!)
-  - **Gameplay Loop**
-    - A node / something gets placed down, and then it exerts influence, and then the world changes in relation to it.
-    - Victory is when you corrupt X% of the map.
-    - Maybe there is a time limit?
-- **Viable Minimum Product**
-  - ONE tileset map, we can place A NODE, and then it tries to grow and self-replicate, and the world responds to it.
-    - The Node, and all of it's logic:
-      - Logic for how it spreads
-      - Logic for how it corrupts /  
-  - Two objectives - Bodies and Gold
-      - "Stretch Goals" would be more objectives.
-  - One Building Type, and it can be corrupted and uncorrupted
-  - Small agents (Skeletons, Knights?) to traverse the world.
-  - Small UI Bar or something where the player can set priorities.
-  - **Scope and Time Plan**
-    - Need to figure out what the "creep tumor" is, and how it spreads corruption.
-    - Need to figure out what populates the world.
-    - Need to figure out how things get corrupted?
-- **Style / Art Direction**
-  - Demonic influence / Corruption
-  - Necromancy / Necrotic Energy (I'm thinking this one)
-  - Fantasy
-- **Genre**
-  - How it controls / Input Style / Camera Style / etc.
-  - I think we go RTS style... again. HA!
-    - Command structure will be much simpler as we won't be inputting a lot of commands
-- **Code Structure**
-- **Division of Labour**
+## Game Overview
+Roles Reversed is an innovative RTS-style game where traditional roles are flipped - you play as the Grim Reaper while the undead and human factions operate autonomously, engaging in an endless battle for dominance. As the Grim Reaper, you control skeleton armies that spread necrotic energy across the map while human factions attempt to stop your corruption.
+
+## Core Gameplay
+
+### The Grim Reaper
+Players control the Grim Reaper, who oversees the growth of the undead faction.
+
+ The Grim Reaper's role is to maintain the balance of this eternal conflict by strategically intervening to ensure the undead faction's survival and growth. Players must carefully manage resources and corruption to tip the scales in favor of the undead while preventing the humans from overwhelming their forces.
+
+### Resource System
+The game features a dual resource system:
+- **PRIMARY_RESOURCE**: Used for constructing buildings and training stronger units
+- **SECONDARY_RESOURCE**: Powers the necrotic aura and corruption spread
+
+### Faction Mechanics
+#### Undead Faction
+- AI-controlled faction
+- Skeleton units and bone fortresses
+- Necrotic auras that corrupt the surrounding land, damaging human units and healing undead units
+- Resource generators that collect bodies and magical energy
+
+#### Human Faction
+- AI-controlled opponent faction
+- Human settlements and outposts
+- Autonomous defense against the spreading corruption
+- Resource collection and unit production
+
+### Map Control
+- Victory is achieved by corrupting a significant portion of the map
+- The necrotic aura grows and shrinks based on your secondary resource level
+- Strategic manipulation of the conflict between undead and humans is essential for territorial control
+
+## Technical Features
+- Sprite-based RTS with resource management
+- Signal-based communication between game elements
+- Building spawning system with faction-specific units
+- Camera system for navigating the map
+- UI system showing real-time resource levels
+
+## Controls
+- Use the mouse to control the Grim Reaper
+- Click the Play button to start the game
+- Structures and units are built automatically by autonomous agents to expand the undead and human empires
+- Manage resources carefully to maintain your army and corruption spread
+
+## Art Style
+- Fantasy theme with necromantic elements
+- Visual distinction between corrupted and uncorrupted land
+- Special visual effects for the necrotic aura
+
+## Development Team
+Created by Ryan and Timo for the 2025 Game Jam with the theme "Roles Reversed."
+
+---
+
+*"Death is just the beginning..."*
