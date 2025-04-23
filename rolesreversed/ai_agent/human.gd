@@ -39,12 +39,6 @@ func _ready():
 	stasis_timer.connect("timeout", Callable(self, "_on_stasis_timeout"))
 	add_child(stasis_timer)
 	
-<<<<<<< HEAD
-func _physics_process(delta: float) -> void:
-	# If not dying
-	if state != states[4]:
-		velocity.x = speed * delta
-=======
 	vision_timer.wait_time = 1.0
 	vision_timer.one_shot = false
 	vision_timer.connect("timeout", Callable(self, "find_new_target_in_vision"))
@@ -58,7 +52,6 @@ func _physics_process(delta: float) -> void:
 			velocity = (vision_target.position - position).normalized() * speed * delta
 		else:
 			velocity = Vector2.LEFT * speed * delta
->>>>>>> 6a42f526fb3f1b683f9f8d64e5f3fe8a243fbae7
 		move_and_slide()
 	else:
 		velocity = Vector2.ZERO
