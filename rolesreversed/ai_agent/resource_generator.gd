@@ -1,5 +1,3 @@
-@tool
-
 extends Node
 
 @export var faction_data: Resource
