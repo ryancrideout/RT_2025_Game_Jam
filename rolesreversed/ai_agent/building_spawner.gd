@@ -145,7 +145,7 @@ func spawn_special_unit():
 
 func spawn_outpost_timer() -> void:
     var timer = Timer.new()
-    timer.wait_time = 30.0
+    timer.wait_time = 15.0
     timer.one_shot = false
     timer.name = "SpawnOutpostTimer"
     timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))

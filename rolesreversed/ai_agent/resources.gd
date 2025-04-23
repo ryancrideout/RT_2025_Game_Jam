@@ -4,7 +4,7 @@ signal resource_changed(resource_type, new_value)
 
 # Resource variables
 var PRIMARY_RESOURCE: int = 100
-var SECONDARY_RESOURCE: int = 50
+var SECONDARY_RESOURCE: int = 0
 
 # Constants for resource costs
 const UNIT_PRIMARY_COST: int = 10
@@ -39,8 +39,8 @@ func update_secondary_resource(amount: int) -> bool:
         
     # Update resource value
     SECONDARY_RESOURCE += amount
-    # Ensure resource doesn't go below zero
-    SECONDARY_RESOURCE = max(SECONDARY_RESOURCE, 0)
+    # Ensure resource stays between 0 and 5000
+    SECONDARY_RESOURCE = clamp(SECONDARY_RESOURCE, 0, 5000)
 
     # Emit signal for resource change
     emit_signal("resource_changed", "secondary", SECONDARY_RESOURCE)
