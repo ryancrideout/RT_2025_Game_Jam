@@ -8,7 +8,7 @@ signal spawn_failed(reason)
 
 # Configuration
 @export var spawn_radius: float = 150.0  # Distance from building to spawn units
-@export var spawn_attempts: int = 10      # Max attempts to find spawn position
+@export var spawn_attempts: int = 10  # Max attempts to find spawn position
 @export var spawn_min_clearance: float = 50.0  # Minimum distance between spawned units
 var health := 200
 
@@ -126,7 +126,7 @@ func is_position_clear(pos: Vector2) -> bool:
 	# var query = PhysicsRayQueryParameters2D.create(global_position, pos)
 	# var result = space_state.intersect_ray(query)
 	# if result:
-	#     return false
+	# return false
 			
 	return true
 
@@ -151,40 +151,40 @@ func spawn_special_unit():
 #
 
 func spawn_outpost_timer() -> void:
-    var timer = Timer.new()
-    timer.wait_time = 15.0
-    timer.one_shot = false
-    timer.name = "SpawnOutpostTimer"
-    timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))
-    add_child(timer)
-    timer.start()
-
+	var timer = Timer.new()
+	timer.wait_time = 15.0
+	timer.one_shot = false
+	timer.name = "SpawnOutpostTimer"
+	timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))
+	add_child(timer)
+	timer.start()
+	
 func _on_spawn_outpost_timer_timeout() -> void:
-    var current_position = self.position
-    print("current_position: ", current_position)
-    var new_spawn_position = current_position + Vector2(randf_range(0, 2000), randf_range(0, 2000))
-    print("new_spawn_position: ", new_spawn_position)
-    
-
-    var resources = agent_owner.get_node("Resources")
-    var buildings_node = agent_owner.get_node("Buildings")
-    if not resources:
-        print("ERROR: Resources not available!")
-        pass
-    
-    if not buildings_node:
-        print("ERROR: Buildings node not available!")
-        pass
-    
-    if resources.try_spawn_outpost():
-        var outpost_scene_path = faction_data.outpost_scene_path
-        var outpost_scene = load(outpost_scene_path)
-        self.spawn_outpost(outpost_scene, "NewOutpost", new_spawn_position)
-    else:
-        print("Failed to spawn building: insufficient resources")
-        pass
+	var current_position = self.position
+	print("current_position: ", current_position)
+	var new_spawn_position = current_position + Vector2(randf_range(0, 2000), randf_range(0, 2000))
+	print("new_spawn_position: ", new_spawn_position)
 
 
+	var resources = agent_owner.get_node("Resources")
+	var buildings_node = agent_owner.get_node("Buildings")
+	if not resources:
+		print("ERROR: Resources not available!")
+		pass
+
+	if not buildings_node:
+		print("ERROR: Buildings node not available!")
+		pass
+
+	if resources.try_spawn_outpost():
+		var outpost_scene_path = faction_data.outpost_scene_path
+		var outpost_scene = load(outpost_scene_path)
+		self.spawn_outpost(outpost_scene, "NewOutpost", new_spawn_position)
+	else:
+		print("Failed to spawn building: insufficient resources")
+		pass
+	
+	
 func spawn_outpost(outpost, outpost_name: String, new_spawn_position) -> void:
 	agent_owner.spawn_building(outpost, outpost_name, new_spawn_position)
 
