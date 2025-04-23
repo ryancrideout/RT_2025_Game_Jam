@@ -262,6 +262,9 @@ bg_color = Color(0.0450601, 0.518837, 0.566394, 1)
 [sub_resource type="CircleShape2D" id="CircleShape2D_okq2j"]
 radius = 30.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxo7k"]
+size = Vector2(400, 400)
+
 [node name="Skeleton" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_uyysq")
@@ -307,6 +310,12 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea2D"]
 shape = SubResource("CircleShape2D_okq2j")
+
+[node name="VisionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisionArea2D"]
+position = Vector2(150, 0)
+shape = SubResource("RectangleShape2D_nxo7k")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
