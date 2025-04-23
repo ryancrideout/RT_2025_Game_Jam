@@ -1,6 +1,7 @@
 extends Node
 
 signal resource_changed(resource_type, new_value)
+signal log_kill(increment)
 
 # Resource variables
 var PRIMARY_RESOURCE: int = 100
@@ -40,7 +41,7 @@ func update_secondary_resource(amount: int) -> bool:
 	# Update resource value
 	SECONDARY_RESOURCE += amount
 	# Ensure resource stays between 0 and 5000
-	SECONDARY_RESOURCE = clamp(SECONDARY_RESOURCE, 0, 5000)
+	SECONDARY_RESOURCE = clamp(SECONDARY_RESOURCE, 0, 10000)
 
 	# Emit signal for resource change
 	emit_signal("resource_changed", "secondary", SECONDARY_RESOURCE)
@@ -91,3 +92,6 @@ func get_resources() -> Dictionary:
 		"primary": PRIMARY_RESOURCE,
 		"secondary": SECONDARY_RESOURCE
 	}
+
+func update_kill(increment):
+	emit_signal("log_kill", increment)

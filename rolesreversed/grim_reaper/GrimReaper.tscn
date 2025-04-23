@@ -16,8 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://cj6m3hkkhwqnx" path="res://grim_reaper/assets/spell_effects/flash_freeze.png" id="12_bvglw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1nlnx"]
-radius = 8.0
-height = 32.0
+radius = 20.0
+height = 60.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ctq6g"]
 atlas = ExtResource("2_nf3od")
@@ -1812,7 +1812,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tk23s"]
-radius = 25.0
+radius = 40.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6jmod"]
 radius = 100.0
@@ -1821,6 +1821,7 @@ radius = 100.0
 radius = 50.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_li2sk"]
+radius = 25.0
 
 [node name="GrimReaper" type="CharacterBody2D"]
 z_index = 5

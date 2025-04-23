@@ -173,3 +173,8 @@ func spawn_free_unit():
 		#print("ERROR: No buildings in array")
 		return false
 	return true
+
+func log_kill():
+	# Log the kill
+	resources.update_kill(1)
+	

@@ -4,6 +4,10 @@ class_name Human
 
 @export var target = null
 @export var vision_target = null
+
+@export var primary_kill_bounty: int = 10
+@export var secondary_kill_bounty: int = 5
+
 var health := 35.0
 var damage := 7.5
 var base_speed: float = 4800.0
@@ -111,6 +115,16 @@ func sprite_management():
 func die():
 	state = states[4]
 	_animated_sprite.play("Dying")
+	var agent_killer = get_node("/root/Game/GameManager/SkeletonAgent")
+	agent_killer.log_kill()
+
+	var agent_killer_resources = get_node("/root/Game/GameManager/SkeletonAgent/Resources")
+	if agent_killer_resources:
+		agent_killer_resources.update_primary_resource(primary_kill_bounty)
+		agent_killer_resources.update_secondary_resource(secondary_kill_bounty)
+	else:
+		print("ERROR: Resources node not found in agent owner!")
+		return
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == "Dying":
@@ -166,7 +180,7 @@ func is_still_valid_target(body) -> bool:
 	if is_instance_valid(body):
 		if body is Building:
 			return true
-		if body.state != states[4]:
+		if body.state not in inactive_states:
 			return true
 		else:
 			return false

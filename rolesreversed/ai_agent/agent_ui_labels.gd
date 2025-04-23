@@ -7,6 +7,7 @@ var secondary_label: Label
 var building_label: Label
 
 var basic_unit_label: Label
+var kill_label: Label
 
 func _agent_init() -> void:
 
@@ -24,6 +25,8 @@ func _agent_init() -> void:
     #print("Agent UI initialized with resources node: ", resources_node)
     resources_node.connect("resource_changed", Callable(self, "_on_resource_changed"))
     #resources_node.connect("resources_depleted", Callable(self, "_on_resources_depleted"))
+    kill_label = $HBoxContainer3/Kills  # Adjust this path to match your UI structure
+    resources_node.connect("log_kill", Callable(self, "update_kill_display"))
 
 func _on_resource_changed(resource_type, new_value):
     # Update UI or game logic based on resource changes
@@ -49,6 +52,11 @@ func update_basic_unit_display(new_value):
     if basic_unit_label:
         basic_unit_label.text = str(new_value)
         #print("Basic unit updated: ", new_value)
+
+func update_kill_display(increment):
+    # Update the kill display
+    if kill_label:
+        kill_label.text = str(kill_label.text.to_int() + increment)
 
 func set_agent_owner(agent: Node) -> void:
     agent_owner = agent
