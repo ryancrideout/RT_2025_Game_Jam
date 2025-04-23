@@ -38,8 +38,10 @@ func _physics_process(_delta: float) -> void:
 		zoom.y = 1.0
 		
 	if Input.is_action_just_released('mouse_wheel_down'):
-		zoom.x -= 0.1
-		zoom.y -= 0.1
+		print(zoom.x)
+		if zoom.x > 0.11:
+			zoom.x -= 0.1
+			zoom.y -= 0.1
 		
 	if Input.is_action_just_released('mouse_wheel_up'):
 		zoom.x += 0.1

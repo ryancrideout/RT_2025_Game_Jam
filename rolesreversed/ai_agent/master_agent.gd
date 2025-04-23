@@ -105,17 +105,18 @@ func spawn_unit() -> bool: #building: Node2D
 		var unit_spawned = false
 
 		for building in buildings:
-			if building.has_method("spawn_unit"):
-				# Check if we have enough resources
-				if resources.try_spawn_unit():
-					building.spawn_basic_unit()
-					resources.update_secondary_resource(resources.UNIT_PRIMARY_COST)
-					unit_spawned = true
+			if is_instance_valid(building):
+				if building.has_method("spawn_unit"):
+					# Check if we have enough resources
+					if resources.try_spawn_unit():
+						building.spawn_basic_unit()
+						resources.update_secondary_resource(resources.UNIT_PRIMARY_COST)
+						unit_spawned = true
+					else:
+						print("Failed to spawn unit: insufficient resources")
+						return false
 				else:
-					print("Failed to spawn unit: insufficient resources")
-					return false
-			else:
-				print("WARNING: Building does not have spawn_unit method")
+					print("WARNING: Building does not have spawn_unit method")
 
 		if not unit_spawned:
 			print("ERROR: No buildings were able to spawn a unit")
