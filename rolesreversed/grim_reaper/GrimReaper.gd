@@ -4,7 +4,10 @@ extends CharacterBody2D
 @onready var camera = $PlayerCamera
 @onready var hitbox = $Hitbox
 @onready var hitbox_shape = $Hitbox/HitboxShape
+@onready var ui = $UILayer/GrimReaperUI
 @export var speed = 625
+
+var agent_owner: Node = null
 
 var states = {
 	0: "Idle",
@@ -18,11 +21,24 @@ var attack_position = Vector2.ZERO
 var damage = 20.0
 
 func _ready() -> void:
+	# Connect the button signals
+	ui.connect("promote_button_pressed", shoryuken)
+	ui.connect("stasis_button_pressed", shoryuken)
+	ui.connect("haste_button_pressed", shoryuken)
+	ui.connect("corpse_explosion_button_pressed", shoryuken)
+	
+	# Make the camera current
 	camera.make_current()
+	
 	# Default state is idle state
 	state = states[0]
 
+func shoryuken():
+	print("SHORYUKEN!")
+
 func _process(_delta):
+	# print(agent_owner.resources.get_resources())
+	# agent_owner.resources.update_secondary_resource(cost)
 	state_management()
 	sprite_management()
 
@@ -103,3 +119,9 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == states[3]:
 		# Set state to idle.
 		state = states[0]
+
+func set_agent_owner(agent: Node) -> void:
+	agent_owner = agent
+
+func get_agent_owner() -> Node:
+	return agent_owner
