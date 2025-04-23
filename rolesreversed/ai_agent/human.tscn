@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=45 format=3 uid="uid://d0fwysjdvpqp0"]
-
+[gd_scene load_steps=46 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
@@ -256,9 +254,9 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m8rpw"]
-radius = 16.0
-height = 50.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qkc6u"]
+radius = 20.0
+height = 60.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3a1dp"]
 size = Vector2(66, 86.3134)
@@ -295,10 +293,8 @@ sprite_frames = SubResource("SpriteFrames_u0ham")
 animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-
-position = Vector2(6, 0)
-shape = SubResource("CapsuleShape2D_m8rpw")
-
+position = Vector2(-6, 0)
+shape = SubResource("CapsuleShape2D_qkc6u")
 
 [node name="AttackRange" type="Area2D" parent="."]
 visible = false

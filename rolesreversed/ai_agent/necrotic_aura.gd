@@ -1,8 +1,8 @@
 extends Area2D
 
 @export var max_radius: float = 5000.0
-@export var grow_speed: float = 200.0     # units/sec
-@export var decay_speed: float = 200.0
+@export var grow_speed: float = 50.0     # units/sec
+@export var decay_speed: float = 100.0
 @export var rotation_speed: float = 15.0
 
 @export var incoming_damage: float = 5
