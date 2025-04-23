@@ -1,9 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bk04t8ig150fr"]
+[gd_scene load_steps=17 format=3 uid="uid://bk04t8ig150fr"]
 
 [ext_resource type="Texture2D" uid="uid://c4fbhe40i1gua" path="res://grim_reaper/assets/Promote.png" id="1_gsmwm"]
 [ext_resource type="Script" uid="uid://j6hptunfidj1" path="res://grim_reaper/GrimReaperUI.gd" id="1_t5gxf"]
+[ext_resource type="Texture2D" uid="uid://d1e00wm5gssdw" path="res://grim_reaper/assets/necrotic energy bar.png" id="2_mn1u1"]
 [ext_resource type="Texture2D" uid="uid://cfxw4kce5pjl8" path="res://grim_reaper/assets/Stasis.png" id="2_t5gxf"]
 [ext_resource type="Texture2D" uid="uid://bkn36gvije4u" path="res://grim_reaper/assets/Haste.png" id="3_22ifn"]
+[ext_resource type="Script" uid="uid://dy1mualjhd15o" path="res://grim_reaper/reaper_progress_bar_energy.gd" id="3_udpyk"]
 [ext_resource type="Texture2D" uid="uid://dtkswhj6f3ups" path="res://grim_reaper/assets/Corpse_Explosion.png" id="4_mn1u1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_172a3"]
@@ -62,43 +64,59 @@ offset_right = 700.0
 offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_172a3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 113.0
-offset_top = 558.0
-offset_right = 577.0
-offset_bottom = 630.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+max_value = 5000.0
+nine_patch_stretch = true
+texture_progress = ExtResource("2_mn1u1")
+script = ExtResource("3_udpyk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.7
 theme_override_constants/separation = 40
 
-[node name="PromoteButton" type="Button" parent="HBoxContainer"]
+[node name="PromoteButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_22ifn")
 text = "1"
 icon = ExtResource("1_gsmwm")
 
-[node name="StasisButton" type="Button" parent="HBoxContainer"]
+[node name="StasisButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_udpyk")
 text = "2"
 icon = ExtResource("2_t5gxf")
 
-[node name="HasteButton" type="Button" parent="HBoxContainer"]
+[node name="HasteButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_12qs4")
 text = "3"
 icon = ExtResource("3_22ifn")
 
-[node name="CorpseExplosionButton" type="Button" parent="HBoxContainer"]
+[node name="CorpseExplosionButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 focus_mode = 0
 shortcut = SubResource("Shortcut_bqlfm")
 text = "4"
 icon = ExtResource("4_mn1u1")
 
-[connection signal="pressed" from="HBoxContainer/PromoteButton" to="." method="_on_promote_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/StasisButton" to="." method="_on_stasis_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/HasteButton" to="." method="_on_haste_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/CorpseExplosionButton" to="." method="_on_corpse_explosion_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/PromoteButton" to="." method="_on_promote_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/StasisButton" to="." method="_on_stasis_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/HasteButton" to="." method="_on_haste_button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/CorpseExplosionButton" to="." method="_on_corpse_explosion_button_pressed"]

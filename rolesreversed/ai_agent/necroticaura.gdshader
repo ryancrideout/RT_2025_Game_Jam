@@ -1,10 +1,11 @@
 shader_type canvas_item;
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
-
 uniform float base_alpha : hint_range(0.0, 1.0) = 0.6;
+uniform float max_alpha : hint_range(0.0, 1.0) = 0.7;
+
+void vertex() {
+    // Called for every vertex the material is visible on.
+}
 
 void fragment() {
     vec2 uv = UV - vec2(0.5);
@@ -12,7 +13,9 @@ void fragment() {
     float circle = smoothstep(0.5, 0.35, dist); // soft circular mask
     vec4 tex = texture(TEXTURE, UV);
 
-    tex.a *= circle * base_alpha;   // combine transparency + circle mask
+    // Multiply the texture's alpha by the circle mask and base_alpha, then clamp to max_alpha.
+    tex.a = min(tex.a * circle * base_alpha, max_alpha);
+
     COLOR = tex;
 }
 

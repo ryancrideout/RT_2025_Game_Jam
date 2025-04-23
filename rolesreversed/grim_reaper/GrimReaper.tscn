@@ -184,6 +184,7 @@ animations = [{
 }]
 
 [node name="GrimReaper" type="CharacterBody2D"]
+z_index = 5
 motion_mode = 1
 script = ExtResource("1_1nlnx")
 
