@@ -82,14 +82,25 @@ func begin_cast(spell_name):
 		
 func cast_spell():
 	# Need to actually have spell logic here.
+	match casting_spell:
+		"Promote":
+			print("Casted Promote")
+		"Stasis":
+			print("Casted Stasis")
+		"Haste":
+			print("Casted Haste")
+		"Corpse_Explosion":
+			print("Casted Corpse Explosion")
 	agent_owner.resources.update_secondary_resource(-spell_costs[casting_spell])
 	
 func sprite_management():
 	if state not in active_states:
 		if velocity != Vector2.ZERO:
+			_animated_sprite.offset.x = 0
 			_animated_sprite.offset.y = 10
 			_animated_sprite.play("Movement")
 		else:
+			_animated_sprite.offset.x = 0
 			_animated_sprite.offset.y = 20
 			_animated_sprite.play("Idle")
 			
@@ -105,6 +116,7 @@ func sprite_management():
 			_animated_sprite.flip_h = true
 		else:
 			_animated_sprite.flip_h = false
+		_animated_sprite.offset.x = 0
 		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[2])
 
@@ -114,18 +126,23 @@ func sprite_management():
 			_animated_sprite.flip_h = true
 		else:
 			_animated_sprite.flip_h = false
+		_animated_sprite.offset.x = 0
 		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[3])
 	
 	# Casting
 	if state == states[4]:
+		_animated_sprite.offset.x = 0
+		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[4])
 		
 	# Casted
 	if state == states[5]:
 		if spell_position.x < (camera.camera_width / 2.0):
+			_animated_sprite.offset.x = -20
 			_animated_sprite.flip_h = true
 		else:
+			_animated_sprite.offset.x = 20
 			_animated_sprite.flip_h = false
 		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[5])
