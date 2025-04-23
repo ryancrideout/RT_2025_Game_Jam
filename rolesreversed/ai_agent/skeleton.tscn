@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dpinexvnuwfg1"]
+[gd_scene load_steps=41 format=3 uid="uid://dpinexvnuwfg1"]
 
 [ext_resource type="Script" uid="uid://syejdqolgc7c" path="res://ai_agent/skeleton.gd" id="1_uyysq"]
 [ext_resource type="Texture2D" uid="uid://bw30sp471fxsa" path="res://ai_agent/assets/Skeleton_Idle.png" id="2_dbvrr"]
@@ -244,6 +244,12 @@ size = Vector2(32, 101.195)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_okq2j"]
 size = Vector2(70, 101.195)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_okq2j"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0wf5"]
+bg_color = Color(0.0450601, 0.518837, 0.566394, 1)
+
 [node name="Skeleton" type="CharacterBody2D"]
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_uyysq")
@@ -254,6 +260,7 @@ sprite_frames = SubResource("SpriteFrames_uyysq")
 animation = &"Windup"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, 7.44081)
 shape = SubResource("RectangleShape2D_dbvrr")
 
@@ -261,8 +268,21 @@ shape = SubResource("RectangleShape2D_dbvrr")
 collision_layer = 0
 
 [node name="AttackBox" type="CollisionShape2D" parent="AttackRange"]
+visible = false
 position = Vector2(0, 7.44081)
 shape = SubResource("RectangleShape2D_okq2j")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -33.0
+offset_top = -47.6212
+offset_right = 29.0
+offset_bottom = -39.6212
+theme_override_styles/background = SubResource("StyleBoxFlat_okq2j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i0wf5")
+max_value = 12.0
+step = 0.0
+value = 12.0
+show_percentage = false
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
