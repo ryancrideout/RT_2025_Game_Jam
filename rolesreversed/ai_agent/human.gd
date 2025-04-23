@@ -117,7 +117,8 @@ func receive_damage(incoming_damage):
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body is StaticBody2D:
 		if body.get_parent() is Building:
-			target = body.get_parent()
+			if body.global_position.x < position.x:
+				target = body.get_parent()
 	if body is Skeleton:
 		target = body
 
