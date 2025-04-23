@@ -145,7 +145,7 @@ func spawn_special_unit():
 
 func spawn_outpost_timer() -> void:
     var timer = Timer.new()
-    timer.wait_time = 10.0
+    timer.wait_time = 30.0
     timer.one_shot = false
     timer.name = "SpawnOutpostTimer"
     timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))
@@ -155,7 +155,7 @@ func spawn_outpost_timer() -> void:
 func _on_spawn_outpost_timer_timeout() -> void:
     var current_position = self.position
     print("current_position: ", current_position)
-    var new_spawn_position = current_position + Vector2(randf_range(0, 3000), randf_range(0, 3000))
+    var new_spawn_position = current_position + Vector2(randf_range(0, 2000), randf_range(0, 2000))
     print("new_spawn_position: ", new_spawn_position)
     
 
