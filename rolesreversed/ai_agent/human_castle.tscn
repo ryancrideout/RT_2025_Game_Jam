@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cnlcv2lujg2od" path="res://ai_agent/building_spawner.gd" id="1_cw16t"]
 [ext_resource type="Texture2D" uid="uid://nvetwng2npwa" path="res://ai_agent/human town.png" id="2_cw16t"]
 [ext_resource type="Resource" uid="uid://c6p3jow2vji4g" path="res://ai_agent/factions/humans.tres" id="2_rd8ed"]
-[ext_resource type="Script" path="res://ai_agent/resource_generator.gd" id="4_1u6fe"]
+[ext_resource type="Script" uid="uid://bljif0yrbhm7t" path="res://ai_agent/resource_generator.gd" id="4_1u6fe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
 size = Vector2(700, 800)

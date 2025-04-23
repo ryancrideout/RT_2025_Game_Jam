@@ -5,6 +5,8 @@ extends Area2D
 @export var decay_speed: float = 100.0
 @export var rotation_speed: float = 15.0
 
+@export var incoming_damage: float = 0.5
+
 var target_radius: float = 0.0
 var current_radius: float = 0.0
 var resources_node: Node
@@ -49,6 +51,8 @@ func initialize_aura():
     if resources_node:
         resources_node.connect("resource_changed", Callable(self, "_on_resource_changed"))
 
+    start_damage_timer()
+
 func _process(delta):
     if current_radius < target_radius:
         current_radius = min(current_radius + grow_speed * delta, target_radius)
@@ -66,3 +70,19 @@ func _on_resource_changed(resource_type, new_value):
     if resource_type == "secondary":
         var ratio :float = clamp(float(new_value) / max_radius, 0.0, 1.0)
         target_radius = ratio * max_radius
+
+func start_damage_timer():
+    var timer = Timer.new()
+    timer.wait_time = 1.0
+    timer.one_shot = false
+    timer.autostart = true
+    timer.connect("timeout", Callable(self, "_on_damage_timer_timeout"))
+    add_child(timer)
+    timer.start()
+
+func _on_damage_timer_timeout():
+    for body in self.get_overlapping_bodies():
+        if body is Skeleton:
+            body.receive_damage(-incoming_damage)
+        elif body is Human:
+            body.receive_damage(incoming_damage)
