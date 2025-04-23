@@ -8,10 +8,10 @@ func _ready():
 
 func _on_play_button_pressed():
 
-	spawn_grim_reaper(Vector2(5000, 5000))
+	var grim_reaper = spawn_grim_reaper(Vector2(5000, 5000), "SkeletonAgent")
 
 	# Spawn two agents with different positions and names
-	spawn_agent(Vector2(3500, 5000),
+	var skeleton_agent = spawn_agent(Vector2(3500, 5000),
 				"res://ai_agent/skeleton_castle.tscn",
 				"/root/Game/GameManager/GrimReaper/UILayer/AgentUI/VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer",
 				"SkeletonAgent")
@@ -19,6 +19,8 @@ func _on_play_button_pressed():
 				"res://ai_agent/human_castle.tscn",
 				"/root/Game/GameManager/GrimReaper/UILayer/AgentUI/VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer",
 				"HumanAgent")
+				
+	grim_reaper.set_agent_owner(skeleton_agent)
 
 # Spawn an agent at the specified position with a given name
 func spawn_agent(spawn_position: Vector2, main_building_scene_path: String, resource_UI_node_path: String, agent_name: String) -> Node:
@@ -31,7 +33,9 @@ func spawn_agent(spawn_position: Vector2, main_building_scene_path: String, reso
 	return agent
 	
 # Spawn an agent at the specified position with a given name
-func spawn_grim_reaper(spawn_position: Vector2):
+func spawn_grim_reaper(spawn_position: Vector2, agent_name: String):
 	var grim_reaper = grim_reaper_scene.instantiate()
 	grim_reaper.position = spawn_position
 	add_child(grim_reaper)
+	
+	return grim_reaper
