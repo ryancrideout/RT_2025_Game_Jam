@@ -102,6 +102,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 
 func is_still_valid_target(body) -> bool:
 	if is_instance_valid(body):
+		if body is Building:
+			return true
 		if body.state != states[4]:
 			return true
 		else:
@@ -113,9 +115,14 @@ func receive_damage(incoming_damage):
 	health -= incoming_damage
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
+	if body is StaticBody2D:
+		if body.get_parent() is Building:
+			target = body.get_parent()
 	if body is Human:
 		target = body
 
 func update_health_bar():
 	if health_bar.value > health:
 		health_bar.value -= 0.5
+	else:
+		health_bar.value += 0.5
