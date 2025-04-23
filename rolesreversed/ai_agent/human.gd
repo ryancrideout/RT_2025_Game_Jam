@@ -6,6 +6,7 @@ class_name Human
 @export var vision_target = null
 var health := 35.0
 var damage := 7.5
+var base_speed: float = 4800.0
 var speed: float = 4800.0
 var lifetime: float = 2000.0
 var is_promoted = false
@@ -209,6 +210,16 @@ func apply_promote():
 	if state not in inactive_states:
 		is_promoted = true
 		star_sprite.visible = true
-		health_bar.max_value += 22.0
-		health += 9.5
+		health_bar.max_value += 65.0
+		health += 35.0
 		damage += 4.5
+
+func apply_haste():
+	if state not in inactive_states:
+		_animated_sprite.speed_scale += 0.2
+		speed += 2800.0
+		
+func apply_stasis():
+	if state not in inactive_states:
+		_animated_sprite.speed_scale *= 0.8
+		speed *= 0.5

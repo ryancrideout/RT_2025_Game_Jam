@@ -8,6 +8,9 @@ var camera_adjustment = Vector2(576.0, 324.0)
 @onready var ui = $UILayer/GrimReaperUI
 @onready var _spell_animations = $SpellManager/SpellAnimations
 @onready var _promote_hitbox = $SpellManager/PromoteHitbox
+@onready var _stasis_hitbox = $SpellManager/StasisHitbox
+@onready var _haste_hitbox = $SpellManager/HasteHitbox
+@onready var _corpse_explosion_hitbox = $SpellManager/CorpseExplosionHitbox
 @export var speed = 625
 var secondary_resource
 
@@ -71,6 +74,20 @@ func _physics_process(_delta: float) -> void:
 					for victim in victims:
 						if victim is Human or victim is Skeleton:
 							victim.apply_promote()
+				"Haste":
+					_spell_animations.play("Haste")
+					var victims = _haste_hitbox.get_overlapping_bodies()
+					for victim in victims:
+						if victim is Human or victim is Skeleton:
+							victim.apply_haste()
+				"Stasis":
+					_spell_animations.play("Stasis")
+					var victims = _stasis_hitbox.get_overlapping_bodies()
+					for victim in victims:
+						if victim is Human or victim is Skeleton:
+							victim.apply_stasis()
+				"Corpse_Explosion":
+					_spell_animations.play("Corpse_Explosion")
 	
 
 func get_input():
@@ -112,11 +129,26 @@ func cast_spell():
 			spell_queue.append(casting_spell)
 
 		"Stasis":
-			print("Casted Stasis")
+			_spell_animations.position = spell_position
+			_stasis_hitbox.position = spell_position
+			# Throw it in a queue so that it gets picked up the next
+			# Physics tick.
+			spell_queue.append(casting_spell)
+			
 		"Haste":
-			print("Casted Haste")
+			_spell_animations.position = spell_position
+			_haste_hitbox.position = spell_position
+			# Throw it in a queue so that it gets picked up the next
+			# Physics tick.
+			spell_queue.append(casting_spell)
+			
 		"Corpse_Explosion":
-			print("Casted Corpse Explosion")
+			_spell_animations.position = spell_position
+			_corpse_explosion_hitbox.position = spell_position
+			# Throw it in a queue so that it gets picked up the next
+			# Physics tick.
+			spell_queue.append(casting_spell)
+			
 	agent_owner.resources.update_secondary_resource(-spell_costs[casting_spell])
 	
 func sprite_management():

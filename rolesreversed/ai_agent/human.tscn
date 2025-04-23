@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d0fwysjdvpqp0"]
+[gd_scene load_steps=45 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
