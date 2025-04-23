@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://dpinexvnuwfg1"]
+[gd_scene load_steps=43 format=3 uid="uid://dpinexvnuwfg1"]
 
 [ext_resource type="Script" uid="uid://syejdqolgc7c" path="res://ai_agent/skeleton.gd" id="1_uyysq"]
 [ext_resource type="Texture2D" uid="uid://bw30sp471fxsa" path="res://ai_agent/assets/Skeleton_Idle.png" id="2_dbvrr"]
+[ext_resource type="Texture2D" uid="uid://bsdknfn4d4ebu" path="res://ai_agent/assets/Star.png" id="2_i0wf5"]
 [ext_resource type="Texture2D" uid="uid://cdkaw4w1hfrk1" path="res://ai_agent/assets/Skeleton_Attacking.png" id="2_okq2j"]
 [ext_resource type="Texture2D" uid="uid://b1hxmsiy0021e" path="res://ai_agent/assets/Skeleton_Death.png" id="2_scte6"]
 [ext_resource type="Texture2D" uid="uid://cxnenxd0as4r0" path="res://ai_agent/assets/Skeleton_Walking.png" id="3_scte6"]
@@ -265,10 +266,16 @@ radius = 30.0
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_uyysq")
 
+[node name="Star" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-25, -26.7869)
+scale = Vector2(0.02125, 0.0320031)
+texture = ExtResource("2_i0wf5")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 1)
 sprite_frames = SubResource("SpriteFrames_uyysq")
-animation = &"Dying"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -276,10 +283,10 @@ position = Vector2(1, 7.44081)
 shape = SubResource("RectangleShape2D_dbvrr")
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="AttackBox" type="CollisionShape2D" parent="AttackRange"]
-visible = false
 position = Vector2(0, 7.44081)
 shape = SubResource("RectangleShape2D_okq2j")
 
@@ -296,6 +303,7 @@ value = 12.0
 show_percentage = false
 
 [node name="ReviveArea2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea2D"]
 shape = SubResource("CircleShape2D_okq2j")

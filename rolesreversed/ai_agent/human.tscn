@@ -1,9 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://d0fwysjdvpqp0"]
+[gd_scene load_steps=44 format=3 uid="uid://d0fwysjdvpqp0"]
 
 [ext_resource type="Script" uid="uid://dctj4hoy5lc7t" path="res://ai_agent/human.gd" id="1_aqsar"]
 [ext_resource type="Texture2D" uid="uid://bbp7lsw80tol6" path="res://ai_agent/assets/Swordsman_Attacking.png" id="2_3a1dp"]
 [ext_resource type="Texture2D" uid="uid://bd7g50fbcotdx" path="res://ai_agent/assets/Swordsman_Idle.png" id="2_aqsar"]
 [ext_resource type="Texture2D" uid="uid://dsfn4hfpxw26q" path="res://ai_agent/assets/Swordsman_Death.png" id="2_djq37"]
+[ext_resource type="Texture2D" uid="uid://bsdknfn4d4ebu" path="res://ai_agent/assets/Star.png" id="2_m8rpw"]
 [ext_resource type="Texture2D" uid="uid://em3o77v36pbm" path="res://ai_agent/assets/Swordsman_Walking.png" id="3_07khc"]
 [ext_resource type="Texture2D" uid="uid://dhr6tgqbkfeu1" path="res://ai_agent/assets/Swordsman_Windup.png" id="5_fyoau"]
 
@@ -272,10 +273,16 @@ radius = 30.0
 scale = Vector2(1, 0.67197)
 script = ExtResource("1_aqsar")
 
+[node name="Star" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(28, -26.7869)
+scale = Vector2(0.023125, 0.0351469)
+texture = ExtResource("2_m8rpw")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 1)
 sprite_frames = SubResource("SpriteFrames_u0ham")
-animation = &"Stasis"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -283,9 +290,9 @@ position = Vector2(0, 4.46448)
 shape = SubResource("RectangleShape2D_oklfc")
 
 [node name="AttackRange" type="Area2D" parent="."]
+visible = false
 
 [node name="AttackBox" type="CollisionShape2D" parent="AttackRange"]
-visible = false
 position = Vector2(0, 4.46449)
 shape = SubResource("RectangleShape2D_3a1dp")
 
@@ -302,6 +309,7 @@ value = 35.0
 show_percentage = false
 
 [node name="ReviveArea2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ReviveArea2D"]
 shape = SubResource("CircleShape2D_3a1dp")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=266 format=3 uid="uid://c8cf1yi5jtr4e"]
+[gd_scene load_steps=267 format=3 uid="uid://c8cf1yi5jtr4e"]
 
 [ext_resource type="Script" uid="uid://dspc8un85qtc6" path="res://grim_reaper/GrimReaper.gd" id="1_1nlnx"]
 [ext_resource type="Texture2D" uid="uid://cdi25ntraolhb" path="res://grim_reaper/assets/Grim_Reaper_Idle.png" id="2_6ixoq"]
@@ -1251,7 +1251,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0r00j")
 }],
-"loop": true,
+"loop": false,
 "name": &"Corpse_Explosion",
 "speed": 60.0
 }, {
@@ -1364,7 +1364,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_t8kvi")
 }],
-"loop": true,
+"loop": false,
 "name": &"Haste",
 "speed": 36.0
 }, {
@@ -1513,7 +1513,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h18sf")
 }],
-"loop": true,
+"loop": false,
 "name": &"Promote",
 "speed": 36.0
 }, {
@@ -1806,10 +1806,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lbt3i")
 }],
-"loop": true,
+"loop": false,
 "name": &"Stasis",
 "speed": 36.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tk23s"]
+radius = 20.0
 
 [node name="GrimReaper" type="CharacterBody2D"]
 z_index = 5
@@ -1817,7 +1820,6 @@ motion_mode = 1
 script = ExtResource("1_1nlnx")
 
 [node name="BodyShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(8, -6)
 shape = SubResource("CapsuleShape2D_1nlnx")
 
@@ -1839,7 +1841,6 @@ script = ExtResource("3_6ixoq")
 [node name="GrimReaperUI" parent="UILayer" instance=ExtResource("5_5g1qx")]
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 
 [node name="HitboxShape" type="CollisionPolygon2D" parent="Hitbox"]
@@ -1849,7 +1850,12 @@ polygon = PackedVector2Array(-32, -50, -9, -54, 23, -52, 59, -41, 82, -28, 93, -
 
 [node name="SpellAnimations" type="AnimatedSprite2D" parent="SpellManager"]
 sprite_frames = SubResource("SpriteFrames_20i64")
-animation = &"Promote"
-frame_progress = 0.210316
+animation = &"Stasis"
+
+[node name="PromoteHitbox" type="Area2D" parent="SpellManager"]
+collision_layer = 0
+
+[node name="PromoteHitboxShape" type="CollisionShape2D" parent="SpellManager/PromoteHitbox"]
+shape = SubResource("CircleShape2D_tk23s")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

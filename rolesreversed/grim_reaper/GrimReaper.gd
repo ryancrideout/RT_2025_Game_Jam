@@ -2,9 +2,12 @@ extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var camera = $PlayerCamera
+var camera_adjustment = Vector2(576.0, 324.0)
 @onready var hitbox = $Hitbox
 @onready var hitbox_shape = $Hitbox/HitboxShape
 @onready var ui = $UILayer/GrimReaperUI
+@onready var _spell_animations = $SpellManager/SpellAnimations
+@onready var _promote_hitbox = $SpellManager/PromoteHitbox
 @export var speed = 625
 var secondary_resource
 
@@ -30,6 +33,8 @@ var spell_costs = {
 	"Corpse_Explosion": 3200
 }
 var casting_spell
+var spell_queue = []
+var ticks = 0
 
 func _ready() -> void:
 	# Connect the button signals
@@ -53,6 +58,20 @@ func _process(_delta):
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
+	
+	if spell_queue != []:
+		ticks += 1
+		if ticks > 1:
+			ticks = 0
+			var active_spell = spell_queue.pop_front()
+			match active_spell:
+				"Promote":
+					_spell_animations.play("Promote")
+					var victims = _promote_hitbox.get_overlapping_bodies()
+					for victim in victims:
+						if victim is Human or victim is Skeleton:
+							victim.apply_promote()
+	
 
 func get_input():
 	var input_direction = Input.get_vector("a", "d", "w", "s")
@@ -66,7 +85,9 @@ func _input(event: InputEvent) -> void:
 	if state == states[4]:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 			# Cast spell function here
-			spell_position = event.position
+			# spell_position = event.position
+			spell_position = (event.position + camera.position - camera_adjustment)
+			
 			cast_spell()
 			state = states[5]
 			
@@ -84,7 +105,12 @@ func cast_spell():
 	# Need to actually have spell logic here.
 	match casting_spell:
 		"Promote":
-			print("Casted Promote")
+			_spell_animations.position = spell_position
+			_promote_hitbox.position = spell_position
+			# Throw it in a queue so that it gets picked up the next
+			# Physics tick.
+			spell_queue.append(casting_spell)
+
 		"Stasis":
 			print("Casted Stasis")
 		"Haste":

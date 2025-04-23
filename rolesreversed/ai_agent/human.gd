@@ -7,8 +7,10 @@ var health := 35.0
 var damage := 7.5
 var speed: float = -4800.0
 var lifetime: float = 2000.0
+var is_promoted = false
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
+@onready var star_sprite = $Star
 
 var stasis_timer = Timer.new()
 
@@ -23,6 +25,7 @@ var states = {
 
 var state
 var active_states = [states[2], states[3], states[4]]
+var inactive_states = [states[4], states[5]]
 
 func _ready():
 	set_process(true)
@@ -107,6 +110,8 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 			target.receive_damage(damage)
 		
 	if _animated_sprite.animation == "Attacking":
+		if is_promoted:
+			health += 1.5
 		if is_still_valid_target(target):
 			# Windup for the next attack
 			state = state[2]
@@ -169,3 +174,11 @@ func update_health_bar():
 		health_bar.value -= 0.5
 	else:
 		health_bar.value += 0.5
+
+func apply_promote():
+	if state not in inactive_states:
+		is_promoted = true
+		star_sprite.visible = true
+		health_bar.max_value += 22.0
+		health += 9.5
+		damage += 4.5
