@@ -2,9 +2,12 @@ extends CharacterBody2D
 
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var camera = $PlayerCamera
+var camera_adjustment = Vector2(576.0, 324.0)
 @onready var hitbox = $Hitbox
 @onready var hitbox_shape = $Hitbox/HitboxShape
 @onready var ui = $UILayer/GrimReaperUI
+@onready var _spell_animations = $SpellManager/SpellAnimations
+@onready var _promote_hitbox = $SpellManager/PromoteHitbox
 @export var speed = 625
 var secondary_resource
 
@@ -30,6 +33,8 @@ var spell_costs = {
 	"Corpse_Explosion": 3200
 }
 var casting_spell
+var spell_queue = []
+var ticks = 0
 
 func _ready() -> void:
 	# Connect the button signals
@@ -53,6 +58,20 @@ func _process(_delta):
 func _physics_process(_delta: float) -> void:
 	get_input()
 	move_and_slide()
+	
+	if spell_queue != []:
+		ticks += 1
+		if ticks > 1:
+			ticks = 0
+			var active_spell = spell_queue.pop_front()
+			match active_spell:
+				"Promote":
+					_spell_animations.play("Promote")
+					var victims = _promote_hitbox.get_overlapping_bodies()
+					for victim in victims:
+						if victim is Human or victim is Skeleton:
+							victim.apply_promote()
+	
 
 func get_input():
 	var input_direction = Input.get_vector("a", "d", "w", "s")
@@ -66,7 +85,9 @@ func _input(event: InputEvent) -> void:
 	if state == states[4]:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 			# Cast spell function here
-			spell_position = event.position
+			# spell_position = event.position
+			spell_position = (event.position + camera.position - camera_adjustment)
+			
 			cast_spell()
 			state = states[5]
 			
@@ -82,14 +103,30 @@ func begin_cast(spell_name):
 		
 func cast_spell():
 	# Need to actually have spell logic here.
+	match casting_spell:
+		"Promote":
+			_spell_animations.position = spell_position
+			_promote_hitbox.position = spell_position
+			# Throw it in a queue so that it gets picked up the next
+			# Physics tick.
+			spell_queue.append(casting_spell)
+
+		"Stasis":
+			print("Casted Stasis")
+		"Haste":
+			print("Casted Haste")
+		"Corpse_Explosion":
+			print("Casted Corpse Explosion")
 	agent_owner.resources.update_secondary_resource(-spell_costs[casting_spell])
 	
 func sprite_management():
 	if state not in active_states:
 		if velocity != Vector2.ZERO:
+			_animated_sprite.offset.x = 0
 			_animated_sprite.offset.y = 10
 			_animated_sprite.play("Movement")
 		else:
+			_animated_sprite.offset.x = 0
 			_animated_sprite.offset.y = 20
 			_animated_sprite.play("Idle")
 			
@@ -105,6 +142,7 @@ func sprite_management():
 			_animated_sprite.flip_h = true
 		else:
 			_animated_sprite.flip_h = false
+		_animated_sprite.offset.x = 0
 		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[2])
 
@@ -114,18 +152,23 @@ func sprite_management():
 			_animated_sprite.flip_h = true
 		else:
 			_animated_sprite.flip_h = false
+		_animated_sprite.offset.x = 0
 		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[3])
 	
 	# Casting
 	if state == states[4]:
+		_animated_sprite.offset.x = 0
+		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[4])
 		
 	# Casted
 	if state == states[5]:
 		if spell_position.x < (camera.camera_width / 2.0):
+			_animated_sprite.offset.x = -20
 			_animated_sprite.flip_h = true
 		else:
+			_animated_sprite.offset.x = 20
 			_animated_sprite.flip_h = false
 		_animated_sprite.offset.y = 0
 		_animated_sprite.play(states[5])
