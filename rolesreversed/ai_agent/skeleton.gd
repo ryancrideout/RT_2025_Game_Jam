@@ -117,7 +117,7 @@ func receive_damage(incoming_damage):
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body is StaticBody2D:
 		if body.get_parent() is Building:
-			if body.global_position.x > position.x:
+			if body.get_parent().faction_data.faction_name == "Human":
 				target = body.get_parent()
 	if body is Human:
 		target = body
