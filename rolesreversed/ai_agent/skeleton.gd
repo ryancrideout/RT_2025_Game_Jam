@@ -8,6 +8,7 @@ var damage := 8.0
 var speed: float = 6400.0
 var lifetime: float = 20.0
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var health_bar = $HealthBar
 
 var states = {
 	0: "Idle",
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 	
 func _process(delta: float):
-	# position.x += speed * delta
+	update_health_bar()
 	sprite_management()
 	lifetime -= delta
 	# If lifetime hits zero and isn't already dying.
@@ -114,3 +115,7 @@ func receive_damage(incoming_damage):
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body is Human:
 		target = body
+
+func update_health_bar():
+	if health_bar.value > health:
+		health_bar.value -= 0.5

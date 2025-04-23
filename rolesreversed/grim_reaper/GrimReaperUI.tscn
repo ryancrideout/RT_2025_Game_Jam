@@ -57,17 +57,16 @@ script = ExtResource("1_t5gxf")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 226.0
 offset_top = 548.0
-offset_right = 926.0
+offset_right = 700.0
 offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_172a3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 344.0
+offset_left = 113.0
 offset_top = 558.0
-offset_right = 808.0
+offset_right = 577.0
 offset_bottom = 630.0
 theme_override_constants/separation = 40
 
