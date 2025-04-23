@@ -133,14 +133,15 @@ func _on_stasis_timeout():
     for area in overlapping_areas:
         if area is Area2D and area.has_method("initialize_aura"):
             # Revive the unit
-            set_collision_layer(1)
-            set_collision_mask(1)
+            
             _animated_sprite.animation = "Dying"
             _animated_sprite.speed_scale = -1.0  # Play in reverse
             _animated_sprite.frame = _animated_sprite.sprite_frames.get_frame_count("Dying") - 1  # Start at the last frame
             _animated_sprite.play()
 
             await _animated_sprite.animation_finished
+            set_collision_layer(1)
+            set_collision_mask(1)
             health_bar.visible = true
             health = 12.0
             lifetime = 2000.0
