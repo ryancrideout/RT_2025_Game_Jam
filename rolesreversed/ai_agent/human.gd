@@ -6,7 +6,7 @@ var target = null
 var health := 35.0
 var damage := 7.5
 var speed: float = -4800.0
-var lifetime: float = 20.0
+var lifetime: float = 2000.0
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var health_bar = $HealthBar
 
