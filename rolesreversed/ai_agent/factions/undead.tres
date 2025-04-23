@@ -18,5 +18,5 @@ PRIMARY_RESOURCE_per_base = 10
 SECONDARY_RESOURCE_per_base = 50
 PRIMARY_RESOURCE_per_outpost = 0
 SECONDARY_RESOURCE_per_outpost = 10
-PRIMARY_RESOURCE_per_unit = null
+PRIMARY_RESOURCE_per_unit = 0
 SECONDARY_RESOURCE_per_unit = 5
