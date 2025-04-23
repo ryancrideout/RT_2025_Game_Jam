@@ -33,7 +33,7 @@ var spell_costs = {
 	"Promote": 625,
 	"Stasis": 1240,
 	"Haste": 1880,
-	"Corpse_Explosion": 3200
+	"Corpse_Explosion": 320
 }
 var casting_spell
 var spell_queue = []
@@ -87,7 +87,17 @@ func _physics_process(_delta: float) -> void:
 						if victim is Human or victim is Skeleton:
 							victim.apply_stasis()
 				"Corpse_Explosion":
-					_spell_animations.play("Corpse_Explosion")
+					var found_corpse = false
+					var victims = _corpse_explosion_hitbox.get_overlapping_bodies()
+					for victim in victims:
+						if victim is Human or victim is Skeleton:
+							if victim.state == "Stasis":
+								found_corpse = true
+								victim.apply_corpse_explosion()
+								_spell_animations.play("Corpse_Explosion")
+					# If we didn't find a corpse, refund the resource cost.
+					if not found_corpse:
+						agent_owner.resources.update_secondary_resource(spell_costs["Corpse_Explosion"])
 	
 
 func get_input():
@@ -123,6 +133,7 @@ func cast_spell():
 	match casting_spell:
 		"Promote":
 			_spell_animations.position = spell_position
+			_spell_animations.scale = Vector2(1.0, 1.0)
 			_promote_hitbox.position = spell_position
 			# Throw it in a queue so that it gets picked up the next
 			# Physics tick.
@@ -130,6 +141,7 @@ func cast_spell():
 
 		"Stasis":
 			_spell_animations.position = spell_position
+			_spell_animations.scale = Vector2(1.0, 1.0)
 			_stasis_hitbox.position = spell_position
 			# Throw it in a queue so that it gets picked up the next
 			# Physics tick.
@@ -137,6 +149,7 @@ func cast_spell():
 			
 		"Haste":
 			_spell_animations.position = spell_position
+			_spell_animations.scale = Vector2(1.0, 1.0)
 			_haste_hitbox.position = spell_position
 			# Throw it in a queue so that it gets picked up the next
 			# Physics tick.
@@ -144,6 +157,7 @@ func cast_spell():
 			
 		"Corpse_Explosion":
 			_spell_animations.position = spell_position
+			_spell_animations.scale = Vector2(3.0, 3.0)
 			_corpse_explosion_hitbox.position = spell_position
 			# Throw it in a queue so that it gets picked up the next
 			# Physics tick.
