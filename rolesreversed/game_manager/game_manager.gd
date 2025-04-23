@@ -33,7 +33,7 @@ func spawn_agent(spawn_position: Vector2, main_building_scene_path: String, reso
 	return agent
 	
 # Spawn an agent at the specified position with a given name
-func spawn_grim_reaper(spawn_position: Vector2, agent_name: String):
+func spawn_grim_reaper(spawn_position: Vector2, _agent_name: String):
 	var grim_reaper = grim_reaper_scene.instantiate()
 	grim_reaper.position = spawn_position
 	add_child(grim_reaper)
