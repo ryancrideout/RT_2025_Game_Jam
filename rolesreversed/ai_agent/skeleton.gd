@@ -46,15 +46,6 @@ func _ready():
     vision_timer.start()
 
 func _physics_process(delta: float) -> void:
-<<<<<<< HEAD
-	# If not dying
-	if state != states[4]:
-		velocity.x = speed * delta
-		move_and_slide()
-	else:
-		velocity = Vector2.ZERO
-	
-=======
     # If not dying
     if state not in active_states:
         if is_instance_valid(vision_target):
@@ -65,7 +56,6 @@ func _physics_process(delta: float) -> void:
     else:
         velocity = Vector2.ZERO
     
->>>>>>> 6a42f526fb3f1b683f9f8d64e5f3fe8a243fbae7
 func _process(delta: float):
 	update_health_bar()
 	sprite_management()
@@ -120,26 +110,6 @@ func die():
 	_animated_sprite.play("Dying")
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-<<<<<<< HEAD
-	if _animated_sprite.animation == "Dying":
-		_animated_sprite.play("Stasis")
-		stasis()
-		
-		
-	if _animated_sprite.animation == "Windup":
-		# Set state to be attacking
-		state = states[3]
-		if is_instance_valid(target):
-			target.receive_damage(damage)
-		
-	if _animated_sprite.animation == "Attacking":
-		if is_still_valid_target(target):
-			# Windup for the next attack
-			state = state[2]
-		else:
-			target = null
-			state = states[0]
-=======
     if _animated_sprite.animation == "Dying":
         _animated_sprite.play("Stasis")
         stasis()
@@ -158,7 +128,6 @@ func _on_animated_sprite_2d_animation_finished() -> void:
             target = null
             vision_target = find_new_target_in_vision()
             state = states[0]
->>>>>>> 6a42f526fb3f1b683f9f8d64e5f3fe8a243fbae7
 
 func stasis():
 	set_collision_layer(0)
@@ -199,20 +168,6 @@ func _on_stasis_timeout():
 	queue_free()
 
 func is_still_valid_target(body) -> bool:
-<<<<<<< HEAD
-	if is_instance_valid(body):
-		if body is Building:
-			return true
-		if body.state != states[4]:
-			return true
-		else:
-			return false
-	else:
-		return false
-		
-func receive_damage(incoming_damage):
-	health -= incoming_damage
-=======
     if is_instance_valid(body):
         if body is Building:
             return true
@@ -240,7 +195,6 @@ func find_new_target_in_vision():
                 return
     else:
         pass
->>>>>>> 6a42f526fb3f1b683f9f8d64e5f3fe8a243fbae7
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
 	if body is StaticBody2D:
