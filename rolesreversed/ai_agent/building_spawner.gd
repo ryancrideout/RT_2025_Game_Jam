@@ -35,7 +35,13 @@ func _ready():
 
 func _process(_delta: float) -> void:
     if health <= 0:
-        queue_free()
+        if self.name == "MainBuilding":
+            # If the main building is destroyed, end the game
+            var grim_reaper = get_tree().get_root().get_node("Game/GameManager/GrimReaper")
+            if grim_reaper:
+                grim_reaper.game_over()
+        else:
+            queue_free()
 
 func set_agent_owner(agent: Node) -> void:
     agent_owner = agent
@@ -70,6 +76,10 @@ func spawn_unit(unit_scene: PackedScene, unit_name: String, spawn_position = nul
     #unit_instance.set_owner(agent_owner)
     unit_instance.set_name(unit_name + "_" + "%06X" % int(randf_range(0, 0xFFFFFF)))
     
+    var army_node = agent_owner.get_node("Army")
+    if army_node.get_child_count() > 50:
+        #emit_signal("spawn_failed", "Army size limit exceeded")
+        return null
     # Add unit to the proper parent
     if agent_owner and agent_owner.has_node("Army"):
         agent_owner.get_node("Army").add_child(unit_instance)
@@ -152,7 +162,9 @@ func spawn_outpost_timer() -> void:
 func _on_spawn_outpost_timer_timeout() -> void:
     var current_position = self.position
     #print("current_position: ", current_position)
-    var new_spawn_position = current_position + Vector2(randf_range(0, 2000), randf_range(0, 2000))
+    var new_spawn_position = current_position + Vector2(randf_range(0, 1000) * faction_data.faction_direction, randf_range(-1000, 1000))
+
+    new_spawn_position.y = clamp(new_spawn_position.y, 3000, 7000)
     #print("new_spawn_position: ", new_spawn_position)
 
 
@@ -171,7 +183,7 @@ func _on_spawn_outpost_timer_timeout() -> void:
         var outpost_scene = load(outpost_scene_path)
         self.spawn_outpost(outpost_scene, "NewOutpost", new_spawn_position)
     else:
-        print("Failed to spawn building: insufficient resources")
+        #print("Failed to spawn building: insufficient resources")
         pass
     
     

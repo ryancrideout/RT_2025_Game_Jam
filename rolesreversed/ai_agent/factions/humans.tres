@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_qqiyd")
-faction_name = "Humans"
+faction_name = "Human"
 basic_unit_scene = ExtResource("1_kxl0i")
 basic_unit_name = "Human"
 ranged_unit_name = ""

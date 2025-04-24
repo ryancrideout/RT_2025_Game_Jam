@@ -1825,6 +1825,7 @@ radius = 25.0
 
 [node name="GrimReaper" type="CharacterBody2D"]
 z_index = 5
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_1nlnx")
 

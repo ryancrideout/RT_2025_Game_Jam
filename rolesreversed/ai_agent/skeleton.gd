@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 			velocity = (vision_target.position - position).normalized() * speed * delta
 		else:
 			velocity = Vector2.RIGHT * speed * delta
-		velocity.y += randf_range(-200.0, 200.0) 
+		velocity.y = lerp(velocity.y, randf_range(-1000.0, 1000.0), 0.1)
 		move_and_slide()
 	else:
 		velocity = Vector2.ZERO
