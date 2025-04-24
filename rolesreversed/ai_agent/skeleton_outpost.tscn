@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ce5osxqcae37a"]
+[gd_scene load_steps=12 format=3 uid="uid://ce5osxqcae37a"]
 
 [ext_resource type="Texture2D" uid="uid://bdf03wjmpywq8" path="res://ai_agent/bone fort.png" id="1_nnlp3"]
 [ext_resource type="Script" uid="uid://cnlcv2lujg2od" path="res://ai_agent/building_spawner.gd" id="1_qsrw8"]
@@ -18,11 +18,18 @@ shader_parameter/max_alpha = 0.7
 [sub_resource type="CircleShape2D" id="CircleShape2D_8761g"]
 radius = 100.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8761g"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vmyn2"]
+bg_color = Color(1, 0, 0.6, 1)
+
 [node name="SkeletonOutpost" type="Node2D"]
 script = ExtResource("1_qsrw8")
 faction_data = ExtResource("2_jrbjt")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 script = ExtResource("3_8761g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -45,3 +52,15 @@ shape = SubResource("CircleShape2D_8761g")
 position = Vector2(0, 10)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_nnlp3")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -99.0
+offset_top = -110.0
+offset_right = 101.0
+offset_bottom = -97.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8761g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vmyn2")
+max_value = 200.0
+step = 0.0
+value = 200.0
+show_percentage = false
