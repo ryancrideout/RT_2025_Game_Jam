@@ -1,6 +1,7 @@
 extends Button
 
 func _ready():
+    get_tree().paused = false
     # Use call_deferred to delay the connection until the scene tree is fully initialized
     call_deferred("_connect_to_game_manager")
     pressed.connect(_on_button_pressed)

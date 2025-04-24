@@ -256,3 +256,18 @@ func set_agent_owner(agent: Node) -> void:
 
 func get_agent_owner() -> Node:
 	return agent_owner
+
+func game_over() -> void:
+	# Game over logic here
+	print("Game Over! The eternal battle is over and the Grim Reaper no longer serves a purpose.")
+	# Optionally, you can emit a signal or call a function to handle game over state
+	# emit_signal("game_over")
+
+	get_tree().paused = true
+	var game_camera = get_tree().get_root().get_node("Game/GameCamera")
+	game_camera.make_current()
+
+	var reaper_ui = get_tree().get_root().get_node("Game/GameManager/GrimReaper/UILayer")
+	reaper_ui.visible = false
+	var game_over_ui = get_tree().get_root().get_node("Game/GameCamera/GameOverUI")
+	game_over_ui.visible = true

@@ -16,8 +16,8 @@ shader = ExtResource("3_0bwi8")
 shader_parameter/base_alpha = 0.4
 shader_parameter/max_alpha = 0.7
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
-size = Vector2(700, 800)
+[sub_resource type="CircleShape2D" id="CircleShape2D_7vop5"]
+radius = 500.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vop5"]
 bg_color = Color(0, 0, 0, 1)
@@ -48,7 +48,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.5, 34.5)
-shape = SubResource("RectangleShape2D_oklfc")
+shape = SubResource("CircleShape2D_7vop5")
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(0, 10)
