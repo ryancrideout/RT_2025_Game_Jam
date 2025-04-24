@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfioo5nwx82pg"]
+[gd_scene load_steps=8 format=3 uid="uid://dfioo5nwx82pg"]
 
 [ext_resource type="Script" uid="uid://cnlcv2lujg2od" path="res://ai_agent/building_spawner.gd" id="1_cw16t"]
 [ext_resource type="Texture2D" uid="uid://nvetwng2npwa" path="res://ai_agent/human town.png" id="2_cw16t"]
@@ -7,6 +7,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oklfc"]
 size = Vector2(700, 800)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1u6fe"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fsqg0"]
+bg_color = Color(0.6, 0.6, 1, 1)
 
 [node name="HumanCastle" type="Node2D"]
 scale = Vector2(0.5, 0.5)
@@ -28,3 +34,15 @@ texture = ExtResource("2_cw16t")
 script = ExtResource("4_1u6fe")
 faction_data = ExtResource("2_rd8ed")
 agent_owner = NodePath("..")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -356.0
+offset_top = -528.0
+offset_right = 342.0
+offset_bottom = -448.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1u6fe")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fsqg0")
+max_value = 200.0
+step = 0.0
+value = 200.0
+show_percentage = false
