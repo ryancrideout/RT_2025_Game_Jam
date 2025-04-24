@@ -21,18 +21,18 @@ var agent_owner: Node = null
 
 func _ready():
 
-	if not faction_data:
-		push_error("Invalid or missing faction data!")
-		return
-		
-	# Get reference to the parent building
-	parent_building = get_parent()
-	
-	# Try to find the agent that owns this building
-	if parent_building and parent_building.has_method("get_agent_owner"):
-		agent_owner = parent_building.get_agent_owner()
+    if not faction_data:
+        push_error("Invalid or missing faction data!")
+        return
+        
+    # Get reference to the parent building
+    parent_building = get_parent()
+    
+    # Try to find the agent that owns this building
+    if parent_building and parent_building.has_method("get_agent_owner"):
+        agent_owner = parent_building.get_agent_owner()
 
-	spawn_outpost_timer()
+    spawn_outpost_timer()
 
 func _process(_delta: float) -> void:
 
@@ -47,10 +47,10 @@ func _process(_delta: float) -> void:
             queue_free()
 
 func set_agent_owner(agent: Node) -> void:
-	agent_owner = agent
+    agent_owner = agent
 
 func get_agent_owner() -> Node:
-	return agent_owner
+    return agent_owner
 
 
 
@@ -100,69 +100,69 @@ func spawn_unit(unit_scene: PackedScene, unit_name: String, spawn_position = nul
 
 # Find a valid position to spawn a unit
 func find_valid_spawn_position() -> Vector2:
-	for attempt in range(spawn_attempts):
-		# Generate a random angle in the allowed ranges
-		var angle: float
-		if randf() < 0.5:
-			# First range: 0 to 2/3π
-			angle = randf_range(0, PI / 2)
-		else:
-			# Second range: 4/3π to 2π
-			angle = randf_range(PI * 3 / 2, TAU)
-		
-		var faction_direction = faction_data.faction_direction
-		# Flip the angle if faction_direction is -1
-		if faction_direction == -1:
-			angle += PI
+    for attempt in range(spawn_attempts):
+        # Generate a random angle in the allowed ranges
+        var angle: float
+        if randf() < 0.5:
+            # First range: 0 to 2/3π
+            angle = randf_range(0, PI / 2)
+        else:
+            # Second range: 4/3π to 2π
+            angle = randf_range(PI * 3 / 2, TAU)
+        
+        var faction_direction = faction_data.faction_direction
+        # Flip the angle if faction_direction is -1
+        if faction_direction == -1:
+            angle += PI
 
-		# Calculate potential spawn position
-		var offset = Vector2(cos(angle), sin(angle)) * spawn_radius
-		var potential_position = global_position + offset
-		
-		# Check if position is valid
-		if is_position_clear(potential_position):
-			return potential_position
-	
-	# If no valid position found after all attempts
-	return Vector2.ZERO
+        # Calculate potential spawn position
+        var offset = Vector2(cos(angle), sin(angle)) * spawn_radius
+        var potential_position = global_position + offset
+        
+        # Check if position is valid
+        if is_position_clear(potential_position):
+            return potential_position
+    
+    # If no valid position found after all attempts
+    return Vector2.ZERO
 
 # Check if a position is clear of obstacles
 func is_position_clear(pos: Vector2) -> bool:
-	# Get all units in scene to check for overlap
-	var units = get_tree().get_nodes_in_group("Army")
-	
-	for unit in units:
-		if unit.global_position.distance_to(pos) < spawn_min_clearance:
-			return false
-			
-	return true
+    # Get all units in scene to check for overlap
+    var units = get_tree().get_nodes_in_group("Army")
+    
+    for unit in units:
+        if unit.global_position.distance_to(pos) < spawn_min_clearance:
+            return false
+            
+    return true
 
 #
 # Public methods called by the agent AI
 #
 
 func spawn_basic_unit():
-	self.spawn_unit(faction_data.basic_unit_scene, faction_data.basic_unit_name)
+    self.spawn_unit(faction_data.basic_unit_scene, faction_data.basic_unit_name)
 
 func spawn_basic_free_unit(spawn_position):
-	self.spawn_unit(faction_data.basic_unit_scene, faction_data.basic_unit_name, spawn_position)
+    self.spawn_unit(faction_data.basic_unit_scene, faction_data.basic_unit_name, spawn_position)
 
 func spawn_ranged_unit():
-	self.spawn_unit(faction_data.ranged_unit_scene, faction_data.ranged_unit_name)
+    self.spawn_unit(faction_data.ranged_unit_scene, faction_data.ranged_unit_name)
 
 func spawn_special_unit():
-	self.spawn_unit(faction_data.special_unit_scene, faction_data.special_unit_name)
+    self.spawn_unit(faction_data.special_unit_scene, faction_data.special_unit_name)
 
 
 func spawn_outpost_timer() -> void:
-	var timer = Timer.new()
-	timer.wait_time = 15.0
-	timer.one_shot = false
-	timer.name = "SpawnOutpostTimer"
-	timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))
-	add_child(timer)
-	timer.start()
-	
+    var timer = Timer.new()
+    timer.wait_time = 15.0
+    timer.one_shot = false
+    timer.name = "SpawnOutpostTimer"
+    timer.connect("timeout", Callable(self, "_on_spawn_outpost_timer_timeout"))
+    add_child(timer)
+    timer.start()
+    
 func _on_spawn_outpost_timer_timeout() -> void:
     var current_position = self.position
     #print("current_position: ", current_position)
@@ -173,15 +173,15 @@ func _on_spawn_outpost_timer_timeout() -> void:
 
 
 
-	var resources = agent_owner.get_node("Resources")
-	var buildings_node = agent_owner.get_node("Buildings")
-	if not resources:
-		print("ERROR: Resources not available!")
-		pass
+    var resources = agent_owner.get_node("Resources")
+    var buildings_node = agent_owner.get_node("Buildings")
+    if not resources:
+        print("ERROR: Resources not available!")
+        pass
 
-	if not buildings_node:
-		print("ERROR: Buildings node not available!")
-		pass
+    if not buildings_node:
+        print("ERROR: Buildings node not available!")
+        pass
 
     if resources.try_spawn_outpost():
         var outpost_scene_path = faction_data.outpost_scene_path
@@ -192,7 +192,7 @@ func _on_spawn_outpost_timer_timeout() -> void:
         pass
 
 func spawn_outpost(outpost, outpost_name: String, new_spawn_position) -> void:
-	agent_owner.spawn_building(outpost, outpost_name, new_spawn_position)
+    agent_owner.spawn_building(outpost, outpost_name, new_spawn_position)
 
 func receive_damage(incoming_damage):
-	health -= incoming_damage
+    health -= incoming_damage

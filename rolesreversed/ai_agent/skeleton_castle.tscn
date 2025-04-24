@@ -33,7 +33,6 @@ faction_data = ExtResource("2_nb3pw")
 script = ExtResource("3_tx830")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 shape = SubResource("CircleShape2D_nb3pw")
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D"]
