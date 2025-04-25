@@ -81,7 +81,7 @@ func spawn_unit(unit_scene: PackedScene, unit_name: String, spawn_position = nul
     unit_instance.set_name(unit_name + "_" + "%06X" % int(randf_range(0, 0xFFFFFF)))
     
     var army_node = agent_owner.get_node("Army")
-    if army_node.get_child_count() > 50:
+    if army_node.get_child_count() > 60:
         #emit_signal("spawn_failed", "Army size limit exceeded")
         return null
     # Add unit to the proper parent

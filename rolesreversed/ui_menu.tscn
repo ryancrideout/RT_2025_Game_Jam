@@ -24,3 +24,21 @@ grow_vertical = 2
 focus_mode = 0
 text = "Start Game"
 script = ExtResource("1_gww7l")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.246
+offset_left = 1.00002
+offset_top = 9.0
+offset_right = 3.0
+offset_bottom = 86.8
+text = "WASD to move, 1234 and left click to cast spells.
+
+Right click to swing your scythe.
+
+You are the Grim Reaper drawing power from the eternal battles between the humans and undead. Your goal is to not allow either side to claim victory."
+horizontal_alignment = 1
+autowrap_mode = 2
