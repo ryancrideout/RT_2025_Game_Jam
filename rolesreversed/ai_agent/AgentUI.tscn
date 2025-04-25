@@ -144,7 +144,6 @@ size_flags_stretch_ratio = 0.2
 [node name="RangedUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "skele2"
 horizontal_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer"]
@@ -176,7 +175,6 @@ size_flags_stretch_ratio = 0.2
 [node name="SpecialUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/UndeadVBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "skele3"
 horizontal_alignment = 1
 
 [node name="HumanVBoxContainer" type="VBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer"]
@@ -258,7 +256,6 @@ size_flags_stretch_ratio = 0.2
 [node name="RangedUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "skele2"
 horizontal_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer"]
@@ -290,7 +287,6 @@ size_flags_stretch_ratio = 0.2
 [node name="SpecialUnit" type="Label" parent="VBoxContainer/ResourcesContainer/HBoxContainer/HumanVBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 6
-text = "skele3"
 horizontal_alignment = 1
 
 [node name="MenuContainer" type="Panel" parent="VBoxContainer"]

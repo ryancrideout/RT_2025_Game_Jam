@@ -63,6 +63,9 @@ func _physics_process(delta: float) -> void:
     else:
         velocity = Vector2.ZERO
     
+    if position.x < 0:
+        queue_free()
+    
 func _process(delta: float):
     update_health_bar()
     sprite_management()
@@ -149,7 +152,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
             state = states[0]
 
 func stasis():
-    set_collision_layer(2)
+    set_collision_layer(0)
     set_collision_mask(0)
     
     health_bar.visible = false
